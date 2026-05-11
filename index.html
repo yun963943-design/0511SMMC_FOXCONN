@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW" class="scroll-smooth">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +29,18 @@
         /* 隱藏滾動條但保持可滾動 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 頁面切換淡入動畫 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
     </style>
 </head>
-<body class="bg-blue-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300 flex">
+<body class="bg-blue-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300 flex min-h-screen">
 
     <!-- 左側選單 (Sidebar) -->
     <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-gray-800 border-r border-blue-100 dark:border-gray-700 shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 flex flex-col">
@@ -42,24 +51,32 @@
         </div>
         
         <!-- 導覽連結 -->
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto no-scrollbar">
-            <a href="#home" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+        <nav class="flex-1 px-4 py-4 space-y-1.5 overflow-y-auto no-scrollbar">
+            <a href="#" onclick="navigate('home'); return false;" data-target="home" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
                 <i data-lucide="home" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_home">首頁</span>
             </a>
-            <a href="#about" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
-                <i data-lucide="info" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_about">公司概況</span>
+            <a href="#" onclick="navigate('motivation'); return false;" data-target="motivation" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+                <i data-lucide="lightbulb" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_motivation">研究動機</span>
             </a>
-            <a href="#performance" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+            <a href="#" onclick="navigate('basic-info'); return false;" data-target="basic-info" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+                <i data-lucide="building" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_basic_info">企業基本資料</span>
+            </a>
+            <a href="#" onclick="navigate('vision'); return false;" data-target="vision" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+                <i data-lucide="compass" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_vision">企業願景</span>
+            </a>
+            <a href="#" onclick="navigate('performance'); return false;" data-target="performance" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
                 <i data-lucide="trending-up" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_performance">經營績效</span>
             </a>
-            <a href="#quiz" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+            <a href="#" onclick="navigate('news'); return false;" data-target="news" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+                <i data-lucide="newspaper" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_news">重大新聞</span>
+            </a>
+            <a href="#" onclick="navigate('quiz'); return false;" data-target="quiz" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
                 <i data-lucide="award" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_quiz">互動測驗</span>
             </a>
-            <a href="#team" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+            <a href="#" onclick="navigate('team'); return false;" data-target="team" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
                 <i data-lucide="users" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_team">團隊與反思</span>
             </a>
-            <!-- 引用資料選單 -->
-            <a href="#references" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
+            <a href="#" onclick="navigate('references'); return false;" data-target="references" class="nav-link flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors font-medium">
                 <i data-lucide="link" class="w-5 h-5 mr-3"></i> <span data-i18n="nav_references">引用資料</span>
             </a>
         </nav>
@@ -68,19 +85,16 @@
     <!-- 遮罩 (手機版用) -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden md:hidden"></div>
 
-    <!-- 主內容區 (靠右側，讓出左側選單空間) -->
+    <!-- 主內容區 -->
     <main class="flex-1 md:ml-64 w-full min-h-screen flex flex-col relative pt-16">
         
-        <!-- 置頂列 (包含功能按鈕與手機版選單切換) -->
+        <!-- 置頂列 -->
         <header class="fixed top-0 right-0 left-0 md:left-64 z-30 h-16 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-4 lg:px-8 transition-colors duration-300 shadow-sm">
-            <!-- 手機版選單切換按鈕 -->
             <button id="mobile-menu-btn" class="md:hidden p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
                 <i data-lucide="menu"></i>
             </button>
-            
-            <div class="hidden md:block"></div> <!-- 桌面版推擠用，將功能按鈕推向右側 -->
-
-            <!-- 控制面板 (語系、明暗、語音) 置頂 -->
+            <div class="hidden md:block"></div>
+            <!-- 控制面板 -->
             <div class="flex items-center space-x-3">
                 <button onclick="toggleLanguage()" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-blue-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition shadow-sm" title="切換語言 / Toggle Language">
                     <i data-lucide="languages" class="w-5 h-5"></i>
@@ -89,247 +103,470 @@
                     <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
                     <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
                 </button>
-                <button onclick="speakText('hero_subtitle')" class="px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition shadow-md flex items-center gap-2" title="語音導覽 / Voice Guide">
+                <button onclick="speakCurrentPage()" class="px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition shadow-md flex items-center gap-2" title="語音導覽 / Voice Guide">
                     <i data-lucide="volume-2" class="w-4 h-4 shrink-0"></i>
-                    <span class="text-sm font-bold hidden sm:block whitespace-nowrap">語音導覽</span>
+                    <span class="text-sm font-bold hidden sm:block whitespace-nowrap" data-i18n="btn_global_voice">朗讀本頁</span>
                 </button>
             </div>
         </header>
 
-        <!-- Hero 首頁區塊 -->
-        <section id="home" class="pt-20 pb-20 px-8 md:pt-32 md:pb-32 flex flex-col items-center justify-center text-center min-h-[80vh] relative overflow-hidden">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-400/10 rounded-full blur-3xl -z-10"></div>
-            
-            <h1 data-i18n="hero_title" class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-sky-500">
-                鴻海科技集團
-            </h1>
-            <p data-i18n="hero_subtitle" class="text-xl md:text-2xl mb-10 max-w-2xl opacity-80 leading-relaxed">
-                從傳統電子代工轉型AI科技平台，結合3+3策略引領智慧未來
-            </p>
-            <a href="#about" class="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl flex items-center gap-2 inline-flex">
-                <span data-i18n="btn_start">開始探索</span>
-                <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
-            </a>
-        </section>
+        <!-- 所有章節內容 -->
+        <div id="content-container" class="flex-1 w-full relative">
 
-        <!-- 區塊一：企業基本資料與願景 -->
-        <section id="about" class="py-20 px-8 max-w-7xl mx-auto">
-            <div class="flex items-center mb-12 cursor-pointer" onclick="speakText('section_about_title')">
-                <h2 data-i18n="section_about_title" class="text-3xl font-bold border-l-4 border-blue-500 pl-4">企業基本資料與研究動機</h2>
-                <i data-lucide="volume-2" class="w-5 h-5 ml-3 text-gray-400 hover:text-blue-500"></i>
-            </div>
+            <!-- 頁面 1：Hero 首頁 -->
+            <section id="home" class="page-section hidden pt-20 pb-20 px-8 md:pt-32 md:pb-32 flex-col items-center justify-center text-center min-h-[80vh] relative overflow-hidden">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-400/10 rounded-full blur-3xl -z-10"></div>
+                <h1 data-i18n="hero_title" class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-sky-500">鴻海科技集團</h1>
+                <p data-i18n="hero_subtitle" class="text-xl md:text-2xl mb-10 max-w-2xl opacity-80 leading-relaxed mx-auto">從傳統電子代工轉型AI科技平台，結合3+3策略引領智慧未來</p>
+                <a href="#" onclick="navigate('motivation'); return false;" class="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl flex items-center gap-2 inline-flex mx-auto">
+                    <span data-i18n="btn_start">開始探索</span>
+                    <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
+                </a>
+            </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-                <!-- 研究動機與基本資料 -->
-                <div class="space-y-6">
-                    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-6">
-                        <h3 class="text-xl font-bold mb-4 flex items-center text-blue-600"><i data-lucide="info" class="mr-2"></i> <span data-i18n="motivation_title">研究動機</span></h3>
-                        <p data-i18n="motivation_text" class="leading-relaxed opacity-90 text-sm md:text-base">鴻海正處於從傳統的「電子代工(EMS)」轉型為「AI科技平台」的關鍵期。隨著全球AI伺服器需求爆發以及電動車(EV)佈局進入量產階段，鴻海如何利用其全球供應鏈優勢與「3+3」策略實現營運轉型，是極具研究價值的企業個案。</p>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-6">
-                        <h3 data-i18n="basic_info_title" class="text-xl font-bold mb-4 text-blue-600">企業營運與全球版圖</h3>
-                        <ul class="space-y-3 opacity-90 font-medium text-sm md:text-base">
-                            <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-400 mr-2 shrink-0"></i> <span data-i18n="info_revenue">營收規模：2025全年達8兆998億新台幣 (年增18.07%)，首度突破8兆大關。</span></li>
-                            <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-400 mr-2 shrink-0"></i> <span data-i18n="info_strategy">核心策略：BOL模式 (建構運營本地化)，落實「兩地研發、三區設計製造、全球組裝交貨」。</span></li>
-                            <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-400 mr-2 shrink-0"></i> <span data-i18n="info_asia">亞洲版圖：台灣(核心研發)、中國(組裝)、越南(伺服器)、印度(手機)、日本(EV)。</span></li>
-                            <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-400 mr-2 shrink-0"></i> <span data-i18n="info_america">美洲版圖：美國(高階AI伺服器)、墨西哥(成本效率導向量產)、巴西(手機)。</span></li>
-                            <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-400 mr-2 shrink-0"></i> <span data-i18n="info_europe">歐澳版圖：捷克(歐洲營運樞紐)、中東歐(製造據點)、澳洲(在地生產)。</span></li>
-                        </ul>
-                    </div>
+            <!-- 頁面 2：研究動機 -->
+            <section id="motivation" class="page-section hidden py-20 px-8 max-w-4xl mx-auto min-h-[70vh]">
+                <div class="flex items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-motivation')">
+                    <h2 data-i18n="motivation_title" class="text-3xl font-bold border-l-4 border-blue-500 pl-4 text-gray-800 dark:text-gray-100">研究動機</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
                 </div>
-
-                <!-- 願景與使命 (翻轉字卡) -->
-                <div>
-                    <h3 data-i18n="vvm_title" class="text-xl font-bold mb-6 text-center text-gray-500">企業核心理念 (點擊字卡翻轉)</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Card 1 -->
-                        <div class="relative w-full h-48 cursor-pointer perspective-1000" onclick="flipCard(this)">
-                            <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
-                                <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-xl shadow-lg border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-                                    <i data-lucide="target" class="w-8 h-8 mb-2 text-blue-500"></i>
-                                    <h3 data-i18n="card_vision_front" class="text-xl font-bold text-center">願景 (Vision)</h3>
-                                </div>
-                                <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-xl shadow-lg bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white">
-                                    <p data-i18n="card_vision_back" class="text-center font-medium">以AI為核心驅動力，成為全方位世界級卓越公司。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="relative w-full h-48 cursor-pointer perspective-1000" onclick="flipCard(this)">
-                            <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
-                                <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-xl shadow-lg border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-                                    <i data-lucide="target" class="w-8 h-8 mb-2 text-blue-500"></i>
-                                    <h3 data-i18n="card_mission_front" class="text-xl font-bold text-center">使命 (Mission)</h3>
-                                </div>
-                                <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-xl shadow-lg bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white">
-                                    <p data-i18n="card_mission_back" class="text-center font-medium">科技開啟智慧生活，用心造就永續發展，攜手共創美好未來。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="relative w-full h-48 cursor-pointer perspective-1000" onclick="flipCard(this)">
-                            <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
-                                <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-xl shadow-lg border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-                                    <i data-lucide="target" class="w-8 h-8 mb-2 text-blue-500"></i>
-                                    <h3 data-i18n="card_value_front" class="text-xl font-bold text-center">核心價值 (Value)</h3>
-                                </div>
-                                <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-xl shadow-lg bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white">
-                                    <p data-i18n="card_value_back" class="text-center font-medium">誠信、勤奮、敏捷、分享、合作、共榮。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 4 -->
-                        <div class="relative w-full h-48 cursor-pointer perspective-1000" onclick="flipCard(this)">
-                            <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
-                                <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-xl shadow-lg border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-                                    <i data-lucide="target" class="w-8 h-8 mb-2 text-blue-500"></i>
-                                    <h3 data-i18n="card_goal_front" class="text-xl font-bold text-center">目標 (Goals)</h3>
-                                </div>
-                                <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-xl shadow-lg bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white">
-                                    <p data-i18n="card_goal_back" class="text-center font-medium text-sm">1. EPS+ESG永續經營 <br>2. 3+3策略(電動車、數位醫療、機器人等) <br>3. 毛利率朝10%邁進。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="content-motivation" class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-8 lg:p-12">
+                    <i data-lucide="lightbulb" class="w-12 h-12 text-blue-500 mb-6"></i>
+                    <p data-i18n="motivation_text" class="text-lg leading-loose opacity-90 text-gray-700 dark:text-gray-300">
+                        鴻海正處於從傳統的「電子代工(EMS)」轉型為「AI科技平台」的關鍵期。隨著全球AI伺服器需求爆發以及電動車(EV)佈局進入量產階段，鴻海如何利用其全球供應鏈優勢與「3+3」策略實現營運轉型，是極具研究價值的企業個案。
+                    </p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 區塊二：經營績效與新聞 -->
-        <section id="performance" class="py-20 px-8 bg-blue-100/50 dark:bg-gray-800/50 border-y border-blue-100 dark:border-gray-700">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex items-center mb-12 cursor-pointer" onclick="speakText('performance_title')">
-                    <h2 data-i18n="performance_title" class="text-3xl font-bold border-l-4 border-blue-500 pl-4">近五年經營績效 (2021-2025)</h2>
-                    <i data-lucide="volume-2" class="w-5 h-5 ml-3 text-gray-400 hover:text-blue-500"></i>
+            <!-- 頁面 3：企業基本資料 -->
+            <section id="basic-info" class="page-section hidden py-20 px-8 max-w-6xl mx-auto min-h-[70vh]">
+                <div class="flex items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-basic-info')">
+                    <h2 data-i18n="nav_basic_info" class="text-3xl font-bold border-l-4 border-blue-500 pl-4 text-gray-800 dark:text-gray-100">企業基本資料</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- 簡易圖表意象與深入分析 -->
-                    <div class="col-span-1 lg:col-span-2 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-8 flex flex-col items-center justify-center">
-                        <i data-lucide="trending-up" class="w-16 h-16 text-blue-500 mb-4"></i>
-                        <p data-i18n="perf_desc" class="text-center font-medium mb-8 leading-relaxed text-sm md:text-base">受惠於AI伺服器需求爆發、MIH開放平台推動，以及精準的全球佈局，2025年雲端網路產品已佔整體營收42%。全年毛利達4,982億元(年增16%)，EPS更創下歷史新高達13.61元，現金股利7.2元提升股東回饋。</p>
-                        
+                <div id="content-basic-info" class="space-y-8">
+                    <!-- 1. 公司簡介 -->
+                    <div class="bg-white dark:bg-gray-800 border-l-4 border-blue-500 shadow-xl rounded-2xl p-8">
+                        <h3 data-i18n="bi_sec1_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4 flex items-center"><i data-lucide="building-2" class="w-6 h-6 mr-3"></i>一、公司簡介</h3>
+                        <p data-i18n="bi_sec1_p1" class="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-3">鴻海科技集團是全球最大的電子代工服務（EMS）企業，主要以電子產品代工、零組件製造、智慧製造與科技服務為核心業務，在全球供應鏈中具有關鍵地位。</p>
+                        <p data-i18n="bi_sec1_p2" class="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300">鴻海不只是單純的製造商，而是逐漸轉型為結合人工智慧（AI）、半導體、電動車、雲端運算與智慧製造的科技平台企業。</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 2. 營收規模 -->
+                        <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8">
+                            <h3 data-i18n="bi_sec2_title" class="text-xl font-bold text-blue-700 dark:text-blue-400 mb-4 flex items-center"><i data-lucide="bar-chart-big" class="w-5 h-5 mr-3"></i>二、營收規模與業務結構</h3>
+                            <ul class="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 shrink-0 mt-0.5"></i>
+                                    <span data-i18n="bi_sec2_1"><span class='font-bold text-gray-900 dark:text-white'>2025 全年營收：</span>達到 8 兆 998 億新台幣，年成長率高達 18.07%，創下歷史新高。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 shrink-0 mt-0.5"></i>
+                                    <span data-i18n="bi_sec2_2"><span class='font-bold text-gray-900 dark:text-white'>歷史性轉折：</span>2024-2025 年間，營收成功跨越 6 兆級距，首度突破 8 兆大關。</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. 營運策略 -->
+                        <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8">
+                            <h3 data-i18n="bi_sec3_title" class="text-xl font-bold text-blue-700 dark:text-blue-400 mb-4 flex items-center"><i data-lucide="crosshair" class="w-5 h-5 mr-3"></i>三、核心營運佈局策略</h3>
+                            <ul class="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                                <li data-i18n="bi_sec3_1"><span class='font-bold text-gray-900 dark:text-white'>宏觀佈局：</span>貫徹「兩地研發、三區設計製造、全球組裝交貨」。</li>
+                                <li data-i18n="bi_sec3_2"><span class='font-bold text-gray-900 dark:text-white'>BOL 模式：</span>核心理念為「建構運營本地化」，靈活應對地緣政治與關稅壁壘。</li>
+                                <li data-i18n="bi_sec3_3"><span class='font-bold text-gray-900 dark:text-white'>雙基地策略：</span>如美洲區，墨西哥負責成本效率量產，美國專攻高階 AI 伺服器。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4. 全球市場版圖 -->
+                    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border-t-4 border-sky-500">
+                        <div class="flex items-center justify-between mb-6 border-b border-gray-100 dark:border-gray-700 pb-4">
+                            <h3 data-i18n="bi_sec4_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 flex items-center"><i data-lucide="globe" class="w-6 h-6 mr-3"></i>四、全球市場版圖</h3>
+                            <span data-i18n="bi_sec4_desc" class="text-sm bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 py-1 px-3 rounded-full font-bold">涵蓋 24 國 / 超過 200 駐點</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+                                <p data-i18n="bi_sec4_asia" class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>亞洲 (技術與核心)</span>
+                                    台灣(核心研發)、中國(組裝)、越南(伺服器/通訊)、印度(手機)、日本(EV)。
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+                                <p data-i18n="bi_sec4_america" class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>美洲 (高階與緩衝)</span>
+                                    美國(高階 AI 製造)、墨西哥(家電/伺服器)、巴西(無塵室/手機)。
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+                                <p data-i18n="bi_sec4_europe" class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>歐洲與大洋洲</span>
+                                    捷克(歐洲營運樞紐)、中東歐(製造據點)、澳洲(在地生產)。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. 主要產品與服務 -->
+                    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8">
+                        <h3 data-i18n="bi_sec5_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-6 flex items-center"><i data-lucide="package" class="w-6 h-6 mr-3"></i>五、主要產品與服務</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="border border-gray-200 dark:border-gray-600 p-4 rounded-xl hover:shadow-md transition">
+                                <i data-lucide="smartphone" class="w-8 h-8 text-indigo-500 mb-2"></i>
+                                <p data-i18n="bi_sec5_1" class="text-sm text-gray-700 dark:text-gray-300"><span class='font-bold block mb-1'>消費性電子</span>主要生產智慧型手機、穿戴裝置、電視等，具備精密組裝與量產優勢。</p>
+                            </div>
+                            <div class="border border-gray-200 dark:border-gray-600 p-4 rounded-xl hover:shadow-md transition">
+                                <i data-lucide="laptop" class="w-8 h-8 text-sky-500 mb-2"></i>
+                                <p data-i18n="bi_sec5_2" class="text-sm text-gray-700 dark:text-gray-300"><span class='font-bold block mb-1'>電腦終端設備</span>筆記型與桌上型電腦、平板等，具備客製化設計能力。</p>
+                            </div>
+                            <div class="border border-gray-200 dark:border-gray-600 p-4 rounded-xl hover:shadow-md transition">
+                                <i data-lucide="server" class="w-8 h-8 text-blue-600 mb-2"></i>
+                                <p data-i18n="bi_sec5_3" class="text-sm text-gray-700 dark:text-gray-300"><span class='font-bold block mb-1'>雲端與網路</span>積極布局 AI 伺服器、資料中心與邊緣運算，為重要成長動能。</p>
+                            </div>
+                            <div class="border border-gray-200 dark:border-gray-600 p-4 rounded-xl hover:shadow-md transition">
+                                <i data-lucide="microchip" class="w-8 h-8 text-purple-500 mb-2"></i>
+                                <p data-i18n="bi_sec5_4" class="text-sm text-gray-700 dark:text-gray-300"><span class='font-bold block mb-1'>零件與科技服務</span>投入半導體、EV 零件、軟體開發、智慧醫療與工業互聯網。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. 資本額 -->
+                    <div class="bg-gradient-to-r from-blue-600 to-sky-500 shadow-xl rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-4 md:mb-0 md:mr-6">
+                            <h3 data-i18n="bi_sec6_title" class="text-2xl font-bold mb-2 flex items-center"><i data-lucide="coins" class="w-6 h-6 mr-3"></i>六、公司資本額</h3>
+                            <p data-i18n="bi_sec6_desc" class="text-blue-50 max-w-2xl leading-relaxed text-sm md:text-base">
+                                核准資本額為 1800 億元，實收資本額 1386.3 億元。龐大資本額不僅代表穩定的資金基礎，也反映其支撐全球布局與大型投資的強大實力。
+                            </p>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <p class="text-sm text-blue-100 mb-1">實收資本額</p>
+                            <p class="text-4xl font-extrabold tracking-tight">1,386 <span class="text-xl">億</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 頁面 4：企業願景 -->
+            <section id="vision" class="page-section hidden py-20 px-8 max-w-5xl mx-auto min-h-[70vh]">
+                <div class="flex items-center justify-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-vision')">
+                    <h2 data-i18n="vvm_title" class="text-3xl font-bold text-center text-gray-800 dark:text-gray-100">企業核心理念 (點擊字卡翻轉)</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
+                </div>
+                
+                <div id="content-vision" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1 -->
+                    <div class="relative w-full h-56 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                        <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                            <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                <i data-lucide="eye" class="w-10 h-10 mb-3 text-blue-500"></i>
+                                <h3 data-i18n="card_vision_front" class="text-2xl font-bold text-center">願景 (Vision)</h3>
+                            </div>
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-8 rounded-2xl shadow-xl bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700">
+                                <p data-i18n="card_vision_back" class="text-center font-medium text-lg leading-relaxed">以AI為核心驅動力，成為全方位世界級卓越公司。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="relative w-full h-56 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                        <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                            <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                <i data-lucide="rocket" class="w-10 h-10 mb-3 text-blue-500"></i>
+                                <h3 data-i18n="card_mission_front" class="text-2xl font-bold text-center">使命 (Mission)</h3>
+                            </div>
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-8 rounded-2xl shadow-xl bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700">
+                                <p data-i18n="card_mission_back" class="text-center font-medium text-lg leading-relaxed">科技開啟智慧生活，用心造就永續發展，攜手共創美好未來。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="relative w-full h-56 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                        <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                            <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                <i data-lucide="heart" class="w-10 h-10 mb-3 text-blue-500"></i>
+                                <h3 data-i18n="card_value_front" class="text-2xl font-bold text-center">核心價值 (Value)</h3>
+                            </div>
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-8 rounded-2xl shadow-xl bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700">
+                                <p data-i18n="card_value_back" class="text-center font-medium text-lg leading-relaxed">誠信、勤奮、敏捷、分享、合作、共榮。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="relative w-full h-56 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                        <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                            <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                <i data-lucide="target" class="w-10 h-10 mb-3 text-blue-500"></i>
+                                <h3 data-i18n="card_goal_front" class="text-2xl font-bold text-center">目標 (Goals)</h3>
+                            </div>
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-8 rounded-2xl shadow-xl bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700">
+                                <p data-i18n="card_goal_back" class="text-center font-medium text-base leading-relaxed">1. EPS+ESG永續經營 <br>2. 3+3策略(電動車、數位醫療、機器人等) <br>3. 毛利率朝10%邁進。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 頁面 5：經營績效 -->
+            <section id="performance" class="page-section hidden py-20 px-8 max-w-6xl mx-auto min-h-[70vh]">
+                <div class="flex items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-performance')">
+                    <h2 data-i18n="performance_title" class="text-3xl font-bold border-l-4 border-blue-500 pl-4 text-gray-800 dark:text-gray-100">近五年經營績效 (2021-2025)</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
+                </div>
+                
+                <div id="content-performance" class="space-y-10">
+                    <!-- 一、整體概況與圖表 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                        <h3 data-i18n="perf_sec1_title" class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">一、整體經營績效概況（2021–2025）</h3>
+                        <p data-i18n="perf_sec1_desc" class="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-8">
+                            2021年至2025年間，鴻海整體營運呈現穩定成長趨勢，尤其2024至2025年受惠於AI伺服器需求爆發，使營收與獲利再創歷史新高。公司從傳統消費性電子代工逐步轉型為AI基礎建設與高階雲端設備供應商，營運結構出現明顯改變。
+                        </p>
                         <!-- 模擬長條圖 -->
-                        <div class="w-full max-w-md flex items-end justify-between h-48 gap-2 border-b border-gray-300 dark:border-gray-600 pb-2">
-                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 100px"></div><span class="text-xs mt-2">2021</span></div>
-                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 110px"></div><span class="text-xs mt-2">2022</span></div>
-                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 95px"></div><span class="text-xs mt-2">2023</span></div>
-                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 140px"></div><span class="text-xs mt-2">2024</span></div>
-                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 180px"></div><span class="text-xs mt-2 text-blue-600 font-bold">2025</span></div>
-                        </div>
-                    </div>
-
-                    <!-- 近期重大新聞 -->
-                    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-6">
-                        <h3 class="text-xl font-bold mb-6 flex items-center text-blue-600"><i data-lucide="newspaper" class="mr-2"></i> <span data-i18n="news_title">近期重大新聞</span></h3>
-                        <div class="space-y-4">
-                            <div class="p-4 rounded-lg border-l-4 border-sky-500 bg-white dark:bg-gray-700/50 shadow-sm">
-                                <p data-i18n="news_1_date" class="text-xs text-sky-500 font-bold mb-1">2026-05-05</p>
-                                <p data-i18n="news_1_title" class="font-medium text-sm leading-snug">4月營收創同期新高：達8,321億元，年增近30%，主因AI伺服器需求持續強勁。</p>
-                            </div>
-                            <div class="p-4 rounded-lg border-l-4 border-blue-600 bg-white dark:bg-gray-700/50 shadow-sm">
-                                <p data-i18n="news_2_date" class="text-xs text-blue-500 font-bold mb-1">2026-05</p>
-                                <p data-i18n="news_2_title" class="font-medium text-sm leading-snug">COMPUTEX 2026 參展：預計展示新一代AI伺服器與液冷散熱技術，並揭示下一個五年轉型計畫。</p>
+                        <div class="w-full max-w-3xl mx-auto flex items-end justify-between h-64 gap-4 border-b-2 border-gray-300 dark:border-gray-600 pb-2">
+                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 120px"></div><span class="text-sm font-bold mt-3">2021</span></div>
+                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 135px"></div><span class="text-sm font-bold mt-3">2022</span></div>
+                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 115px"></div><span class="text-sm font-bold mt-3">2023</span></div>
+                            <div class="w-1/5 flex flex-col items-center"><div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity" style="height: 170px"></div><span class="text-sm font-bold mt-3">2024</span></div>
+                            <div class="w-1/5 flex flex-col items-center">
+                                <div class="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-md hover:opacity-80 transition-opacity relative group" style="height: 220px">
+                                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">突破 8 兆</span>
+                                </div>
+                                <span class="text-sm mt-3 text-blue-600 dark:text-blue-400 font-extrabold">2025</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- 區塊三：互動測驗 -->
-        <section id="quiz" class="py-20 px-8 max-w-4xl mx-auto">
-            <div class="flex justify-center items-center mb-10 cursor-pointer" onclick="speakText('quiz_title')">
-                <i data-lucide="award" class="w-8 h-8 text-blue-500 mr-3"></i>
-                <h2 data-i18n="quiz_title" class="text-3xl font-bold text-center">知識小測驗</h2>
-            </div>
+                    <!-- 二、營運績效分析 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                        <h3 data-i18n="perf_sec2_title" class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-6 border-b border-gray-100 dark:border-gray-700 pb-2">二、營運績效分析</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- 營收 -->
+                            <div class="bg-blue-50 dark:bg-gray-700/30 p-6 rounded-xl border border-blue-100 dark:border-gray-600">
+                                <h4 data-i18n="perf_sec2_sub1" class="font-bold text-lg text-blue-800 dark:text-blue-300 mb-3 flex items-center"><i data-lucide="bar-chart-3" class="w-5 h-5 mr-2"></i>（一）營業收入分析</h4>
+                                <ul class="space-y-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <li data-i18n="perf_sec2_sub1_1"><span class="font-bold">1. 營收先升後降，再創高峰：</span>2021至2023年間受惠於iPhone組裝及伺服器需求持續成長，2023短暫放緩。2024與2025年AI伺服器需求快速成長，帶動雲端網路產品大幅提升，2025全年突破8兆元。</li>
+                                    <li data-i18n="perf_sec2_sub1_2"><span class="font-bold">2. AI伺服器成為主要成長引擎：</span>2025年第四季，雲端網路產品已占整體營收約42%，超越消費性電子產品，顯示結構逐漸轉型。</li>
+                                </ul>
+                            </div>
+                            <!-- 毛利 -->
+                            <div class="bg-blue-50 dark:bg-gray-700/30 p-6 rounded-xl border border-blue-100 dark:border-gray-600">
+                                <h4 data-i18n="perf_sec2_sub2" class="font-bold text-lg text-blue-800 dark:text-blue-300 mb-3 flex items-center"><i data-lucide="pie-chart" class="w-5 h-5 mr-2"></i>（二）營業毛利分析</h4>
+                                <ul class="space-y-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <li data-i18n="perf_sec2_sub2_1"><span class="font-bold">1. 獲利結構逐漸穩定：</span>透過產品組合優化與高附加價值產品，近五年毛利額持續提升，2025全年毛利達4,982億元，年增16%。</li>
+                                    <li data-i18n="perf_sec2_sub2_2"><span class="font-bold">2. 高單價AI產品壓縮毛利率：</span>AI產品零組件成本高，2025毛利率約6.15%略降，但營業利益率提升，代表營運效率改善。</li>
+                                </ul>
+                            </div>
+                            <!-- 淨利 -->
+                            <div class="bg-blue-50 dark:bg-gray-700/30 p-6 rounded-xl border border-blue-100 dark:border-gray-600">
+                                <h4 data-i18n="perf_sec2_sub3" class="font-bold text-lg text-blue-800 dark:text-blue-300 mb-3 flex items-center"><i data-lucide="line-chart" class="w-5 h-5 mr-2"></i>（三）淨利率分析</h4>
+                                <ul class="space-y-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <li data-i18n="perf_sec2_sub3_1"><span class="font-bold">1. 獲利表現穩健成長：</span>淨利率整體呈現穩定向上趨勢，2025年提升至2.34%，創近年較佳表現。</li>
+                                    <li data-i18n="perf_sec2_sub3_2"><span class="font-bold">2. AI產品提高本業獲利能力：</span>高需求與大量出貨帶動營業利益增加，2025年營業利益率提升至3.20%，顯示本業體質改善。</li>
+                                </ul>
+                            </div>
+                            <!-- 毛利率 -->
+                            <div class="bg-blue-50 dark:bg-gray-700/30 p-6 rounded-xl border border-blue-100 dark:border-gray-600">
+                                <h4 data-i18n="perf_sec2_sub4" class="font-bold text-lg text-blue-800 dark:text-blue-300 mb-3 flex items-center"><i data-lucide="percent" class="w-5 h-5 mr-2"></i>（四）營業毛利率分析</h4>
+                                <ul class="space-y-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    <li data-i18n="perf_sec2_sub4_1"><span class="font-bold">1. 毛利率維持穩定：</span>近五年維持在6%左右，在電子代工產業中已屬穩定水準。</li>
+                                    <li data-i18n="perf_sec2_sub4_2"><span class="font-bold">2. 結構性成長明顯：</span>高階雲端設備比重提升，逐步擺脫低毛利代工模式，未來仍有提升空間。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="space-y-6">
-                <!-- 題目 1 -->
-                <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-6" id="q1-container">
-                    <h4 data-i18n="quiz_q1" class="text-lg font-bold mb-4">Q1: 請問鴻海在2025年的全年營收首度突破了多少大關？</h4>
-                    <div class="space-y-2">
-                        <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"><span data-i18n="quiz_q1_opt1">5兆新台幣</span></button>
-                        <button onclick="answerQuiz(1, true, this)" class="quiz-btn w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"><span data-i18n="quiz_q1_opt2">8兆新台幣</span></button>
-                        <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"><span data-i18n="quiz_q1_opt3">10兆新台幣</span></button>
+                    <!-- 三、營運成長動能 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                        <h3 data-i18n="perf_sec3_title" class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-6 border-b border-gray-100 dark:border-gray-700 pb-2">三、營運成長動能</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="border-t-4 border-blue-500 bg-gray-50 dark:bg-gray-700/50 p-5 rounded-b-xl shadow-sm">
+                                <h4 data-i18n="perf_sec3_sub1" class="font-bold text-blue-700 dark:text-blue-300 mb-2">（一）AI伺服器需求快速成長</h4>
+                                <p data-i18n="perf_sec3_sub1_desc" class="text-sm text-gray-600 dark:text-gray-300">AI生成式應用爆發，使全球對HPC與AI伺服器需求急速增加。鴻海已成為主要供應商，AI伺服器營收突破兆元規模，未來將維持高速成長。</p>
+                            </div>
+                            <div class="border-t-4 border-sky-500 bg-gray-50 dark:bg-gray-700/50 p-5 rounded-b-xl shadow-sm">
+                                <h4 data-i18n="perf_sec3_sub2" class="font-bold text-blue-700 dark:text-blue-300 mb-2">（二）建立開放式電動車平台</h4>
+                                <p data-i18n="perf_sec3_sub2_desc" class="text-sm text-gray-600 dark:text-gray-300">積極發展電動車產業，推出MIH開放平台並陸續發表Model C、Model B等車款，與國際車廠合作跨足智慧電動車市場。</p>
+                            </div>
+                            <div class="border-t-4 border-indigo-500 bg-gray-50 dark:bg-gray-700/50 p-5 rounded-b-xl shadow-sm">
+                                <h4 data-i18n="perf_sec3_sub3" class="font-bold text-blue-700 dark:text-blue-300 mb-2">（三）全球布局提升競爭力</h4>
+                                <p data-i18n="perf_sec3_sub3_desc" class="text-sm text-gray-600 dark:text-gray-300">為因應地緣政治與供應鏈重組，積極擴展美國、印度、越南與墨西哥等地產能。持續導入自動化與智慧製造技術，提高生產效率。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 四、股東報酬 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                        <h3 data-i18n="perf_sec4_title" class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-6 border-b border-gray-100 dark:border-gray-700 pb-2">四、股東報酬</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="flex flex-col items-center text-center p-4">
+                                <div class="w-16 h-16 bg-blue-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400">
+                                    <i data-lucide="trending-up" class="w-8 h-8"></i>
+                                </div>
+                                <h4 data-i18n="perf_sec4_sub1" class="font-bold mb-2 text-lg">（一）每股盈餘（EPS）</h4>
+                                <p data-i18n="perf_sec4_sub1_desc" class="text-sm text-gray-600 dark:text-gray-400">EPS持續成長，2021至2025呈穩定上升趨勢，2025年達13.61元創歷史新高。反映AI產品逐步提高整體獲利水準。</p>
+                            </div>
+                            <div class="flex flex-col items-center text-center p-4">
+                                <div class="w-16 h-16 bg-blue-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400">
+                                    <i data-lucide="wallet" class="w-8 h-8"></i>
+                                </div>
+                                <h4 data-i18n="perf_sec4_sub2" class="font-bold mb-2 text-lg">（二）每股淨資產</h4>
+                                <p data-i18n="perf_sec4_sub2_desc" class="text-sm text-gray-600 dark:text-gray-400">基礎價值持續增加，代表企業財務體質穩健。資本結構健康也提高市場對公司長期投資價值的信心。</p>
+                            </div>
+                            <div class="flex flex-col items-center text-center p-4">
+                                <div class="w-16 h-16 bg-blue-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400">
+                                    <i data-lucide="coins" class="w-8 h-8"></i>
+                                </div>
+                                <h4 data-i18n="perf_sec4_sub3" class="font-bold mb-2 text-lg">（三）現金股利</h4>
+                                <p data-i18n="perf_sec4_sub3_desc" class="text-sm text-gray-600 dark:text-gray-400">長期維持穩定配息政策，2025年每股現金股利提升至7.2元創上市新高，隨著獲利成長持續展現穩定回饋股東的能力。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- 題目 2 -->
-                <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-6" id="q2-container">
-                    <h4 data-i18n="quiz_q2" class="text-lg font-bold mb-4">Q2: 鴻海近年積極推動的「3+3」策略中，「不包含」下列哪個新興產業？</h4>
-                    <div class="space-y-2">
-                        <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"><span data-i18n="quiz_q2_opt1">電動車 (EV)</span></button>
-                        <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"><span data-i18n="quiz_q2_opt2">數位醫療</span></button>
-                        <button onclick="answerQuiz(2, true, this)" class="quiz-btn w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"><span data-i18n="quiz_q2_opt3">傳統紡織業</span></button>
+            <!-- 頁面 6：重大新聞 -->
+            <section id="news" class="page-section hidden py-20 px-8 max-w-4xl mx-auto min-h-[70vh]">
+                <div class="flex items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-news')">
+                    <h2 data-i18n="news_title" class="text-3xl font-bold border-l-4 border-blue-500 pl-4 text-gray-800 dark:text-gray-100">近期重大新聞</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
+                </div>
+                
+                <div id="content-news" class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-8 lg:p-12">
+                    <div class="space-y-6">
+                        <div class="p-6 rounded-xl border-l-4 border-sky-500 bg-sky-50 dark:bg-gray-700/50 shadow-sm transition-transform hover:-translate-y-1">
+                            <div class="flex items-center text-sky-600 dark:text-sky-400 font-bold mb-2">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                <span data-i18n="news_1_date">2025-12-04</span>
+                            </div>
+                            <a href="https://www.cna.com.tw/news/afe/202512040205.aspx" target="_blank" class="hover:underline block mb-2">
+                                <h4 data-i18n="news_1_title" class="font-bold text-xl leading-relaxed text-blue-700 dark:text-blue-400">
+                                    鴻海擴大醫療布局 刷手機器人明年春季導入台中榮總
+                                </h4>
+                            </a>
+                            <p data-i18n="news_1_desc" class="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                                鴻海集團積極布局數位健康，宣布將於2026年春季在台中榮總導入「刷手機器人」，專責手術室器械處理，此計畫結合AI與「四朵雲」協作架構提升臨床效率，未來更規劃擴展護理及照護機器人應用，並聯手各大醫院與科技大廠，共同建構跨領域的數位健康與智慧醫療生態系。
+                            </p>
+                        </div>
+                        
+                        <div class="p-6 rounded-xl border-l-4 border-blue-600 bg-blue-50 dark:bg-gray-700/50 shadow-sm transition-transform hover:-translate-y-1">
+                            <div class="flex items-center text-blue-600 dark:text-blue-400 font-bold mb-2">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                <span data-i18n="news_2_date">2026-02</span>
+                            </div>
+                            <a href="https://cmnews.com.tw/article/newsyoudeservetoknow-6211ef86-1d3e-11f1-8d1b-989f08c2e389" target="_blank" class="hover:underline block mb-2">
+                                <h4 data-i18n="news_2_title" class="font-bold text-xl leading-relaxed text-blue-700 dark:text-blue-400">
+                                    【即時新聞】最新大摩報告看好鴻海，2月AI機櫃出貨2400台穩居台廠龍頭
+                                </h4>
+                            </a>
+                            <p data-i18n="news_2_desc" class="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                                摩根士丹利發布最新報告，指出鴻海在AI伺服器機櫃出貨表現優異，二月份以約2,400台的出貨量穩居台廠龍頭，受惠於強勁的拉貨動能，法人預估第一季總出貨將季增至8,500台，全年更有望倍增，鴻海近期營收受AI業務帶動顯著成長，吸引外資重新佈局並維持優於大盤評等，展現其在AI硬體製造領域的領先地位與穩健動能。
+                            </p>
+                        </div>
                     </div>
                 </div>
-                
-                <div id="quiz-result" class="hidden text-center mt-6 p-4 bg-blue-100 text-blue-800 rounded-xl font-bold animate-pulse">
-                    測驗完成！感謝您的參與。
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 區塊四：團隊與反思 -->
-        <section id="team" class="py-20 px-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-            <div class="max-w-5xl mx-auto">
-                <h2 data-i18n="team_title" class="text-3xl font-bold text-center mb-12">團隊介紹與專案反思</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-blue-50 dark:bg-gray-800 border border-blue-100 dark:border-gray-700 shadow-xl rounded-2xl p-6 border-l-4 border-l-blue-500">
-                        <h3 class="text-xl font-bold mb-3 flex items-center"><i data-lucide="users" class="mr-2 text-blue-500"></i> <span data-i18n="collab_title">團隊協作模式</span></h3>
-                        <p data-i18n="team_members" class="mb-4 text-sm font-bold text-blue-600">組員：楊皓心、鍾幼萱、邵欣逸、林冠宇、陳冠蓁、林詩芸、游育恩</p>
-                        <p data-i18n="collab_text" class="leading-relaxed opacity-90 text-sm">我們並非單純切割任務，而是採用敏捷式協作。在初期共同研究 TPO 資料並決定策略分析工具；進入網頁製作階段時，我們在 GitHub 上共同檢閱程式碼，確保內容品質與設計創意(UI/UX)的整體一致性。</p>
+            <!-- 頁面 7：互動測驗 -->
+            <section id="quiz" class="page-section hidden py-20 px-8 max-w-4xl mx-auto min-h-[70vh]">
+                <div class="flex justify-center items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-quiz')">
+                    <i data-lucide="award" class="w-8 h-8 mr-3"></i>
+                    <h2 data-i18n="quiz_title" class="text-3xl font-bold text-center text-gray-800 dark:text-gray-100">知識小測驗</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
+                </div>
+
+                <div id="content-quiz" class="space-y-6">
+                    <!-- 題目 1 -->
+                    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-8" id="q1-container">
+                        <h4 data-i18n="quiz_q1" class="text-xl font-bold mb-6">Q1: 請問鴻海在2025年的全年營收首度突破了多少大關？</h4>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt1">5兆新台幣</span></button>
+                            <button onclick="answerQuiz(1, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt2">8兆新台幣</span></button>
+                            <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt3">10兆新台幣</span></button>
+                        </div>
+                    </div>
+
+                    <!-- 題目 2 -->
+                    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-xl rounded-2xl p-8" id="q2-container">
+                        <h4 data-i18n="quiz_q2" class="text-xl font-bold mb-6">Q2: 鴻海近年積極推動的「3+3」策略中，「不包含」下列哪個新興產業？</h4>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt1">電動車 (EV)</span></button>
+                            <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt2">數位醫療</span></button>
+                            <button onclick="answerQuiz(2, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt3">傳統紡織業</span></button>
+                        </div>
                     </div>
                     
-                    <div class="bg-blue-50 dark:bg-gray-800 border border-blue-100 dark:border-gray-700 shadow-xl rounded-2xl p-6 border-l-4 border-l-sky-500">
-                        <h3 class="text-xl font-bold mb-3 flex items-center"><i data-lucide="cpu" class="mr-2 text-sky-500"></i> <span data-i18n="ai_title">AI 工具運用聲明</span></h3>
-                        <p data-i18n="ai_text" class="leading-relaxed opacity-90 text-sm">本專案在資料搜集與彙整階段使用了 ChatGPT 協助摘要冗長的財報資訊；網頁結構與基礎互動功能（如翻轉字卡與深色模式）則透過 Claude/Gemini 輔助生成基礎程式碼，隨後由團隊成員手動調整細節與中英雙語語意，符合學術誠信原則。</p>
+                    <div id="quiz-result" class="hidden text-center mt-8 p-6 bg-blue-100 border border-blue-300 text-blue-800 rounded-2xl font-bold text-xl animate-pulse">
+                        測驗完成！感謝您的參與。
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 區塊五：引用資料 -->
-        <section id="references" class="py-16 px-8 bg-gray-50 dark:bg-gray-800/80 border-t border-gray-200 dark:border-gray-700">
-            <div class="max-w-5xl mx-auto">
-                <div class="flex items-center mb-8">
-                    <i data-lucide="link" class="w-6 h-6 text-blue-500 mr-3"></i>
-                    <h2 data-i18n="ref_title" class="text-2xl font-bold">引用與參考資料</h2>
+            <!-- 頁面 8：團隊與反思 -->
+            <section id="team" class="page-section hidden py-20 px-8 max-w-5xl mx-auto min-h-[70vh]">
+                <div class="flex items-center justify-center mb-12 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-team')">
+                    <h2 data-i18n="team_title" class="text-3xl font-bold text-center border-b-2 border-blue-500 inline-block pb-2 text-gray-800 dark:text-gray-100">團隊介紹與專案反思</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
                 </div>
-                <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-                    <ul class="space-y-4">
+                
+                <div id="content-team" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white dark:bg-gray-800 border border-blue-100 dark:border-gray-700 shadow-xl rounded-2xl p-8 border-t-4 border-t-blue-500">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-lucide="users" class="mr-3 text-blue-500"></i> <span data-i18n="collab_title">團隊協作模式</span></h3>
+                        <p data-i18n="team_members" class="mb-6 text-base font-bold text-blue-600 bg-blue-50 dark:bg-gray-700 p-3 rounded-lg">組員：楊皓心、鍾幼萱、邵欣逸、林冠宇、陳冠蓁、林詩芸、游育恩</p>
+                        <p data-i18n="collab_text" class="leading-relaxed opacity-90 text-base">我們並非單純切割任務，而是採用敏捷式協作。在初期共同研究 TPO 資料並決定策略分析工具；進入網頁製作階段時，我們在 GitHub 上共同檢閱程式碼，確保內容品質與設計創意(UI/UX)的整體一致性。</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 border border-blue-100 dark:border-gray-700 shadow-xl rounded-2xl p-8 border-t-4 border-t-sky-500">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-lucide="cpu" class="mr-3 text-sky-500"></i> <span data-i18n="ai_title">AI 工具運用聲明</span></h3>
+                        <p data-i18n="ai_text" class="leading-relaxed opacity-90 text-base mt-4">本專案在資料搜集與彙整階段使用了 ChatGPT 協助摘要冗長的財報資訊；網頁結構與基礎互動功能（如翻轉字卡與深色模式）則透過 Claude/Gemini 輔助生成基礎程式碼，隨後由團隊成員手動調整細節與中英雙語語意，符合學術誠信原則。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 頁面 9：引用資料 -->
+            <section id="references" class="page-section hidden py-20 px-8 max-w-4xl mx-auto min-h-[70vh]">
+                <div class="flex items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-references')">
+                    <i data-lucide="link" class="w-8 h-8 mr-3"></i>
+                    <h2 data-i18n="ref_title" class="text-3xl font-bold text-gray-800 dark:text-gray-100">引用與參考資料</h2>
+                    <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i>
+                    <span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
+                </div>
+                <div id="content-references" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-xl">
+                    <ul class="space-y-6">
                         <li class="flex items-start">
-                            <i data-lucide="external-link" class="w-5 h-5 text-gray-400 mr-3 mt-0.5 shrink-0"></i>
+                            <i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i>
                             <div>
-                                <a href="#" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-medium" data-i18n="ref_1">國策管 - 1142 互動式學習網頁競賽規則與 TP0 提案指引</a>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">國策管課程規定與作業說明文件 (PDF)。</p>
+                                <a href="#" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_1">國策管 - 1142 互動式學習網頁競賽規則與 TP0 提案指引</a>
+                                <p class="text-base text-gray-600 dark:text-gray-400 mt-2">國策管課程規定與作業說明文件 (PDF)。</p>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i data-lucide="external-link" class="w-5 h-5 text-gray-400 mr-3 mt-0.5 shrink-0"></i>
+                            <i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i>
                             <div>
-                                <a href="https://moodle.nccu.edu.tw/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-medium" data-i18n="ref_2">Moodle 課程討論區</a>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">專案繳交與資料發布平台。</p>
+                                <a href="https://moodle.nccu.edu.tw/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_2">Moodle 課程討論區</a>
+                                <p class="text-base text-gray-600 dark:text-gray-400 mt-2">專案繳交與資料發布平台。</p>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i data-lucide="external-link" class="w-5 h-5 text-gray-400 mr-3 mt-0.5 shrink-0"></i>
+                            <i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i>
                             <div>
-                                <a href="#" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-medium" data-i18n="ref_3">鴻海科技集團 官方網站與財務報告</a>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">企業營收規模、BOL營運策略與近期重大新聞出處。</p>
+                                <a href="#" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_3">鴻海科技集團 官方網站與財務報告</a>
+                                <p class="text-base text-gray-600 dark:text-gray-400 mt-2">企業營收規模、BOL營運策略與近期重大新聞出處。</p>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <!-- 頁尾 Footer -->
-        <footer class="bg-gray-800 dark:bg-black text-gray-300 py-8 text-center border-t border-gray-700 mt-auto">
+        <footer class="bg-gray-800 dark:bg-black text-gray-300 py-8 text-center border-t border-gray-700 mt-auto w-full">
             <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
-                <!-- 課程名稱與授課教師 -->
                 <p data-i18n="footer_text" class="font-medium tracking-wide mb-3 text-sm md:text-base text-gray-100">課程名稱：1142 國際策略管理 | 授課教師：梅筱珍</p>
                 <div class="w-16 h-0.5 bg-gray-600 mb-3"></div>
                 <p class="text-xs opacity-60">© 2026 國際策略管理 G2 Merida. All rights reserved.</p>
@@ -345,25 +582,79 @@
         // --- 多語系資料 ---
         const translations = {
             zh: {
-                nav_home: "首頁", nav_about: "公司概況", nav_performance: "經營績效", nav_quiz: "互動測驗", nav_team: "團隊與反思", nav_references: "引用資料",
+                nav_home: "首頁", nav_motivation: "研究動機", nav_basic_info: "企業基本資料", nav_vision: "企業願景", nav_performance: "經營績效", nav_news: "重大新聞", nav_quiz: "互動測驗", nav_team: "團隊與反思", nav_references: "引用資料",
+                btn_read_content: "朗讀內容", btn_global_voice: "朗讀本頁",
                 hero_title: "鴻海科技集團", hero_subtitle: "從傳統電子代工轉型AI科技平台，結合3+3策略引領智慧未來", btn_start: "開始探索",
-                section_about_title: "企業基本資料與研究動機", motivation_title: "研究動機",
+                motivation_title: "研究動機",
                 motivation_text: "鴻海正處於從傳統的「電子代工(EMS)」轉型為「AI科技平台」的關鍵期。隨著全球AI伺服器需求爆發以及電動車(EV)佈局進入量產階段，鴻海如何利用其全球供應鏈優勢與「3+3」策略實現營運轉型，是極具研究價值的企業個案。",
-                basic_info_title: "企業營運與全球版圖", 
-                info_revenue: "營收規模：2025全年達8兆998億新台幣 (年增18.07%)，首度突破8兆大關。", 
-                info_strategy: "核心策略：BOL模式 (建構運營本地化)，落實「兩地研發、三區設計製造、全球組裝交貨」。",
-                info_asia: "亞洲版圖：台灣(核心研發)、中國(組裝)、越南(伺服器)、印度(手機)、日本(EV)。", 
-                info_america: "美洲版圖：美國(高階AI伺服器)、墨西哥(成本效率導向量產)、巴西(手機)。", 
-                info_europe: "歐澳版圖：捷克(歐洲營運樞紐)、中東歐(製造據點)、澳洲(在地生產)。",
+                
+                bi_sec1_title: "一、公司簡介",
+                bi_sec1_p1: "鴻海科技集團是全球最大的電子代工服務（EMS）企業，主要以電子產品代工、零組件製造、智慧製造與科技服務為核心業務，在全球供應鏈中具有關鍵地位。",
+                bi_sec1_p2: "鴻海不只是單純的製造商，而是逐漸轉型為結合人工智慧（AI）、半導體、電動車、雲端運算與智慧製造的科技平台企業。",
+                bi_sec2_title: "二、營收規模與業務結構",
+                bi_sec2_1: "<span class='font-bold text-gray-900 dark:text-white'>2025 全年營收：</span>達到 8 兆 998 億新台幣，年成長率高達 18.07%，創下歷史新高。",
+                bi_sec2_2: "<span class='font-bold text-gray-900 dark:text-white'>歷史性轉折：</span>2024-2025 年間，營收成功跨越 6 兆級距，首度突破 8 兆大關。",
+                bi_sec3_title: "三、核心營運佈局策略",
+                bi_sec3_1: "<span class='font-bold text-gray-900 dark:text-white'>宏觀佈局：</span>貫徹「兩地研發、三區設計製造、全球組裝交貨」的方針。",
+                bi_sec3_2: "<span class='font-bold text-gray-900 dark:text-white'>BOL 模式：</span>核心理念為「建構運營本地化」，靈活應對地緣政治與關稅壁壘。",
+                bi_sec3_3: "<span class='font-bold text-gray-900 dark:text-white'>雙基地策略：</span>如美洲區，墨西哥負責成本效率量產，美國專攻高階 AI 伺服器。",
+                bi_sec4_title: "四、全球市場版圖",
+                bi_sec4_desc: "涵蓋 24 國 / 超過 200 駐點",
+                bi_sec4_asia: "<span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>亞洲 (技術與核心)</span>台灣(核心研發)、中國(組裝)、越南(伺服器/通訊)、印度(手機)、日本(EV)。",
+                bi_sec4_america: "<span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>美洲 (高階與緩衝)</span>美國(高階 AI 製造)、墨西哥(家電/伺服器)、巴西(無塵室/手機)。",
+                bi_sec4_europe: "<span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>歐洲與大洋洲</span>捷克(歐洲營運樞紐)、中東歐(製造據點)、澳洲(在地生產)。",
+                bi_sec5_title: "五、主要產品與服務",
+                bi_sec5_1: "<span class='font-bold block mb-1'>消費性電子</span>主要生產智慧型手機、穿戴裝置、電視等，具備精密組裝與量產優勢。",
+                bi_sec5_2: "<span class='font-bold block mb-1'>電腦終端設備</span>筆記型與桌上型電腦、平板等，具備客製化設計能力。",
+                bi_sec5_3: "<span class='font-bold block mb-1'>雲端與網路</span>積極布局 AI 伺服器、資料中心與邊緣運算，為重要成長動能。",
+                bi_sec5_4: "<span class='font-bold block mb-1'>零件與科技服務</span>投入半導體、EV 零件、軟體開發、智慧醫療與工業互聯網。",
+                bi_sec6_title: "六、公司資本額",
+                bi_sec6_desc: "核准資本額為 1800 億元，實收資本額 1386.3 億元。龐大資本額不僅代表穩定的資金基礎，也反映其支撐全球布局與大型投資的強大實力。",
+
                 vvm_title: "企業核心理念 (點擊字卡翻轉)",
                 card_vision_front: "願景 (Vision)", card_vision_back: "以AI為核心驅動力，成為全方位世界級卓越公司。",
                 card_mission_front: "使命 (Mission)", card_mission_back: "科技開啟智慧生活，用心造就永續發展，攜手共創美好未來。",
                 card_value_front: "核心價值 (Value)", card_value_back: "誠信、勤奮、敏捷、分享、合作、共榮。",
                 card_goal_front: "目標 (Goals)", card_goal_back: "1. EPS+ESG永續經營 <br>2. 3+3策略(電動車、數位醫療、機器人等) <br>3. 毛利率朝10%邁進。",
+                
                 performance_title: "近五年經營績效 (2021-2025)", 
-                perf_desc: "受惠於AI伺服器需求爆發、MIH開放平台推動，以及精準的全球佈局，2025年雲端網路產品已佔整體營收42%。全年毛利達4,982億元(年增16%)，EPS更創下歷史新高達13.61元，現金股利7.2元提升股東回饋。",
-                news_title: "近期重大新聞", news_1_date: "2026-05-05", news_1_title: "4月營收創同期新高：達8,321億元，年增近30%，主因AI伺服器需求持續強勁。",
-                news_2_date: "2026-05", news_2_title: "COMPUTEX 2026 參展：預計展示新一代AI伺服器與液冷散熱技術，並揭示下一個五年轉型計畫。",
+                perf_sec1_title: "一、整體經營績效概況（2021–2025）",
+                perf_sec1_desc: "2021年至2025年間，鴻海整體營運呈現穩定成長趨勢，尤其2024至2025年受惠於AI伺服器需求爆發，使營收與獲利再創歷史新高。公司從傳統消費性電子代工逐步轉型為AI基礎建設與高階雲端設備供應商，營運結構出現明顯改變。",
+                perf_sec2_title: "二、營運績效分析",
+                perf_sec2_sub1: "（一）營業收入分析",
+                perf_sec2_sub1_1: "<span class='font-bold'>1. 營收先升後降，再創高峰：</span>2021年至2023年間受惠於iPhone組裝及伺服器需求成長，2023短暫放緩。2024與2025年AI伺服器需求快速成長，帶動雲端網路產品大幅提升，2025全年突破8兆元。",
+                perf_sec2_sub1_2: "<span class='font-bold'>2. AI伺服器成為主要成長引擎：</span>2025年第四季，雲端網路產品已占整體營收約42%，超越消費性電子產品，顯示結構逐漸轉型。",
+                perf_sec2_sub2: "（二）營業毛利分析",
+                perf_sec2_sub2_1: "<span class='font-bold'>1. 獲利結構逐漸穩定：</span>透過產品組合優化與高附加價值產品，近五年毛利額持續提升，2025全年毛利達4,982億元，年增16%。",
+                perf_sec2_sub2_2: "<span class='font-bold'>2. 高單價AI產品壓縮毛利率：</span>AI產品零組件成本高，2025毛利率約6.15%略降，但營業利益率提升，代表營運效率改善。",
+                perf_sec2_sub3: "（三）淨利率分析",
+                perf_sec2_sub3_1: "<span class='font-bold'>1. 獲利表現穩健成長：</span>淨利率整體呈現穩定向上趨勢，2025年提升至2.34%，創近年較佳表現。",
+                perf_sec2_sub3_2: "<span class='font-bold'>2. AI產品提高本業獲利能力：</span>高需求與大量出貨帶動營業利益增加，2025年營業利益率提升至3.20%，顯示本業體質改善。",
+                perf_sec2_sub4: "（四）營業毛利率分析",
+                perf_sec2_sub4_1: "<span class='font-bold'>1. 毛利率維持穩定：</span>近五年維持在6%左右，在電子代工產業中已屬穩定水準。",
+                perf_sec2_sub4_2: "<span class='font-bold'>2. 結構性成長明顯：</span>高階雲端設備比重提升，逐步擺脫低毛利代工模式，未來仍有提升空間。",
+                perf_sec3_title: "三、營運成長動能",
+                perf_sec3_sub1: "（一）AI伺服器需求快速成長",
+                perf_sec3_sub1_desc: "AI生成式應用爆發，使全球對HPC與AI伺服器需求急速增加。鴻海已成為主要供應商，AI伺服器營收突破兆元規模，未來將維持高速成長。",
+                perf_sec3_sub2: "（二）建立開放式電動車平台",
+                perf_sec3_sub2_desc: "積極發展電動車產業，推出MIH開放平台並陸續發表Model C、Model B等車款，與國際車廠合作跨足智慧電動車市場。",
+                perf_sec3_sub3: "（三）全球布局提升競爭力",
+                perf_sec3_sub3_desc: "為因應地緣政治與供應鏈重組，積極擴展美國、印度、越南與墨西哥等地產能。持續導入自動化與智慧製造技術，提高生產效率。",
+                perf_sec4_title: "四、股東報酬",
+                perf_sec4_sub1: "（一）每股盈餘（EPS）",
+                perf_sec4_sub1_desc: "EPS持續成長，2021至2025呈穩定上升趨勢，2025年達13.61元創歷史新高。反映AI產品逐步提高整體獲利水準。",
+                perf_sec4_sub2: "（二）每股淨資產",
+                perf_sec4_sub2_desc: "基礎價值持續增加，代表企業財務體質穩健。資本結構健康也提高市場對公司長期投資價值的信心。",
+                perf_sec4_sub3: "（三）現金股利",
+                perf_sec4_sub3_desc: "長期維持穩定配息政策，2025年每股現金股利提升至7.2元創上市新高，隨著獲利成長持續展現穩定回饋股東的能力。",
+
+                news_title: "近期重大新聞", 
+                news_1_date: "2025-12-04", 
+                news_1_title: "鴻海擴大醫療布局 刷手機器人明年春季導入台中榮總",
+                news_1_desc: "鴻海集團積極布局數位健康，宣布將於2026年春季在台中榮總導入「刷手機器人」，專責手術室器械處理，此計畫結合AI與「四朵雲」協作架構提升臨床效率，未來更規劃擴展護理及照護機器人應用，並聯手各大醫院與科技大廠，共同建構跨領域的數位健康與智慧醫療生態系。",
+                news_2_date: "2026-02", 
+                news_2_title: "【即時新聞】最新大摩報告看好鴻海，2月AI機櫃出貨2400台穩居台廠龍頭",
+                news_2_desc: "摩根士丹利發布最新報告，指出鴻海在AI伺服器機櫃出貨表現優異，二月份以約2,400台的出貨量穩居台廠龍頭，受惠於強勁的拉貨動能，法人預估第一季總出貨將季增至8,500台，全年更有望倍增，鴻海近期營收受AI業務帶動顯著成長，吸引外資重新佈局並維持優於大盤評等，展現其在AI硬體製造領域的領先地位與穩健動能。",
                 quiz_title: "知識小測驗", quiz_q1: "Q1: 請問鴻海在2025年的全年營收首度突破了多少大關？",
                 quiz_q1_opt1: "5兆新台幣", quiz_q1_opt2: "8兆新台幣", quiz_q1_opt3: "10兆新台幣",
                 quiz_q2: "Q2: 鴻海近年積極推動的「3+3」策略中，「不包含」下列哪個新興產業？", quiz_q2_opt1: "電動車 (EV)", quiz_q2_opt2: "數位醫療", quiz_q2_opt3: "傳統紡織業",
@@ -375,25 +666,79 @@
                 footer_text: "課程名稱：1142 國際策略管理 | 授課教師：梅筱珍"
             },
             en: {
-                nav_home: "Home", nav_about: "About", nav_performance: "Performance", nav_quiz: "Quiz", nav_team: "Team & Reflection", nav_references: "References",
+                nav_home: "Home", nav_motivation: "Motivation", nav_basic_info: "Basic Info", nav_vision: "Vision", nav_performance: "Performance", nav_news: "Recent News", nav_quiz: "Quiz", nav_team: "Team & Reflection", nav_references: "References",
+                btn_read_content: "Read Content", btn_global_voice: "Read Page",
                 hero_title: "Foxconn Technology Group", hero_subtitle: "Transforming from an EMS to an AI tech platform, leading a smart future with the 3+3 strategy.", btn_start: "Explore Now",
-                section_about_title: "Company Profile & Motivation", motivation_title: "Research Motivation",
+                motivation_title: "Research Motivation",
                 motivation_text: "Foxconn is at a critical stage of transitioning from a traditional EMS to an 'AI Tech Platform'. Driven by the explosion of AI server demand and the mass production of EVs, analyzing how Foxconn leverages its global supply chain and '3+3' strategy makes it a highly valuable case study.",
-                basic_info_title: "Operations & Global Footprint", 
-                info_revenue: "Revenue: Reached NT$8.09 Trillion in 2025 (YoY +18.07%), crossing the 8T mark for the first time.", 
-                info_strategy: "Strategy: BOL (Build Operate Localize) Model, enabling R&D in two regions and manufacturing in three.",
-                info_asia: "Asia: Taiwan (HQ & R&D), China (Assembly), Vietnam (Servers), India (Mobiles), Japan (EVs).", 
-                info_america: "Americas: US (High-end AI servers), Mexico (Cost-efficient mass production), Brazil (Mobiles).", 
-                info_europe: "Europe & Oceania: Czech (European Hub), CEE (Manufacturing), Australia (Local production).",
+                
+                bi_sec1_title: "I. Company Profile",
+                bi_sec1_p1: "Foxconn Technology Group is the world's largest Electronic Manufacturing Services (EMS) provider. Its core businesses include electronics manufacturing, components, smart manufacturing, and tech services, playing a critical role in the global supply chain.",
+                bi_sec1_p2: "Foxconn is transforming from a pure manufacturer into a tech platform integrating AI, semiconductors, EVs, cloud computing, and smart manufacturing.",
+                bi_sec2_title: "II. Revenue Scale & Mix",
+                bi_sec2_1: "<span class='font-bold text-gray-900 dark:text-white'>2025 Revenue:</span> Reached NT$8.0998 trillion, up 18.07% YoY, setting a new historical record.",
+                bi_sec2_2: "<span class='font-bold text-gray-900 dark:text-white'>Historic Milestone:</span> Surpassed the 6T range and crossed the 8T mark for the first time during 2024-2025.",
+                bi_sec3_title: "III. Core Operational Strategy",
+                bi_sec3_1: "<span class='font-bold text-gray-900 dark:text-white'>Macro Layout:</span> 'R&D in two locations, design/manufacturing in three regions, global delivery.'",
+                bi_sec3_2: "<span class='font-bold text-gray-900 dark:text-white'>BOL Model:</span> 'Build Operate Localize' ensures agility against geopolitical risks and tariffs.",
+                bi_sec3_3: "<span class='font-bold text-gray-900 dark:text-white'>Dual-Base Strategy:</span> In the Americas, Mexico handles cost-efficient mass production, while the US focuses on high-end AI servers.",
+                bi_sec4_title: "IV. Global Footprint",
+                bi_sec4_desc: "24 Countries / 200+ Locations",
+                bi_sec4_asia: "<span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>Asia (Tech Core)</span> Taiwan (R&D/Battery), China (Assembly), Vietnam (Servers), India (Mobiles), Japan (EVs).",
+                bi_sec4_america: "<span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>Americas (High-end)</span> US (AI Servers), Mexico (Servers/Appliances), Brazil (Cleanroom/Mobiles).",
+                bi_sec4_europe: "<span class='font-bold text-blue-600 dark:text-blue-400 block mb-1 text-base'>Europe & Oceania</span> Czech (Hub/Automation), CEE (Manufacturing), Australia (Local production).",
+                bi_sec5_title: "V. Main Products & Services",
+                bi_sec5_1: "<span class='font-bold block mb-1'>Consumer Electronics</span> Smartphones, wearables, TVs with advantages in precision assembly and mass production.",
+                bi_sec5_2: "<span class='font-bold block mb-1'>Computing & Terminals</span> Laptops, desktops, tablets with customized design capabilities.",
+                bi_sec5_3: "<span class='font-bold block mb-1'>Cloud & Networking</span> Actively expanding in AI servers, data centers, and edge computing as key growth drivers.",
+                bi_sec5_4: "<span class='font-bold block mb-1'>Components & Services</span> Semiconductors, EV parts, software, smart healthcare, and industrial internet.",
+                bi_sec6_title: "VI. Capital Strength",
+                bi_sec6_desc: "Authorized capital NT$180B, Paid-in capital NT$138.63B. This massive capital represents a stable financial foundation and reflects the strength to support global layout and large-scale investments.",
+
                 vvm_title: "Core Philosophy (Click Cards to Flip)",
                 card_vision_front: "Vision", card_vision_back: "To be a comprehensive, world-class excellent company driven by AI.",
                 card_mission_front: "Mission", card_mission_back: "Powering smart life with tech, creating sustainability with heart, and building a better future together.",
                 card_value_front: "Core Values", card_value_back: "Integrity, Diligence, Agility, Sharing, Cooperation, Co-prosperity.",
                 card_goal_front: "Goals", card_goal_back: "1. EPS+ESG Sustainability <br>2. 3+3 Strategy (EV, Digital Health, Robotics) <br>3. Moving towards a 10% gross margin.",
+                
                 performance_title: "5-Year Performance (2021-2025)", 
-                perf_desc: "Driven by AI server demand, the MIH platform, and a precise global layout, cloud networking products accounted for 42% of 2025 revenue. Gross profit reached NT$498.2 billion (+16% YoY). EPS hit a record NT$13.61, with dividends increasing to NT$7.2.",
-                news_title: "Recent News", news_1_date: "2026-05-05", news_1_title: "April Revenue Hits Record High: Reached NT$832.1 billion, up nearly 30% YoY due to strong AI server demand.",
-                news_2_date: "2026-05", news_2_title: "COMPUTEX 2026: Expected to showcase next-gen AI servers & liquid cooling tech, unveiling the next 5-year plan.",
+                perf_sec1_title: "I. Overall Performance (2021-2025)",
+                perf_sec1_desc: "From 2021 to 2025, Foxconn showed steady growth. Benefiting from the AI server boom in 2024-2025, revenue and profit hit record highs. The company successfully transformed from consumer electronics to an AI infrastructure provider.",
+                perf_sec2_title: "II. Operational Analysis",
+                perf_sec2_sub1: "(1) Revenue Analysis",
+                perf_sec2_sub1_1: "<span class='font-bold'>1. Fluctuation to New Highs:</span> Growth from 2021-2023 paused briefly in 2023, but AI demand in 2024-2025 drove total revenue past NT$8 trillion.",
+                perf_sec2_sub1_2: "<span class='font-bold'>2. AI as the Main Engine:</span> By Q4 2025, cloud network products accounted for 42% of revenue, surpassing consumer electronics.",
+                perf_sec2_sub2: "(2) Gross Profit Analysis",
+                perf_sec2_sub2_1: "<span class='font-bold'>1. Stabilizing Structure:</span> Gross profit reached NT$498.2 billion in 2025 (+16% YoY).",
+                perf_sec2_sub2_2: "<span class='font-bold'>2. AI Margins:</span> High component costs for AI servers slightly compressed gross margin to 6.15%, but operating efficiency improved.",
+                perf_sec2_sub3: "(3) Net Margin Analysis",
+                perf_sec2_sub3_1: "<span class='font-bold'>1. Steady Profit Growth:</span> Net margin improved steadily, reaching 2.34% in 2025.",
+                perf_sec2_sub3_2: "<span class='font-bold'>2. Boosting Core Profitability:</span> Operating margin rose to 3.20% due to high AI product demand.",
+                perf_sec2_sub4: "(4) Gross Margin Analysis",
+                perf_sec2_sub4_1: "<span class='font-bold'>1. Stable Margin:</span> Maintained around 6%, standard for the EMS industry.",
+                perf_sec2_sub4_2: "<span class='font-bold'>2. Structural Growth:</span> Moving away from low-margin manufacturing, leaving room for future margin expansion.",
+                perf_sec3_title: "III. Growth Drivers",
+                perf_sec3_sub1: "(1) AI Server Demand",
+                perf_sec3_sub1_desc: "Global demand for HPC and AI servers surged. Foxconn is a top supplier with AI server revenue passing the trillion-dollar mark.",
+                perf_sec3_sub2: "(2) Open EV Platform",
+                perf_sec3_sub2_desc: "Launched the MIH platform and models like Model C & B, officially entering the smart EV market with global partners.",
+                perf_sec3_sub3: "(3) Global Layout Competitiveness",
+                perf_sec3_sub3_desc: "Expanding capacities in the US, India, Vietnam, and Mexico to mitigate geopolitical risks and improve supply chain agility.",
+                perf_sec4_title: "IV. Shareholder Return",
+                perf_sec4_sub1: "(1) Earnings Per Share (EPS)",
+                perf_sec4_sub1_desc: "Steady increase, hitting a record NT$13.61 in 2025, reflecting enhanced profitability from AI products.",
+                perf_sec4_sub2: "(2) Net Asset Value per Share",
+                perf_sec4_sub2_desc: "Steady growth in base value demonstrates a robust financial structure and increases long-term investor confidence.",
+                perf_sec4_sub3: "(3) Cash Dividend",
+                perf_sec4_sub3_desc: "Maintained a stable dividend policy, raising cash dividends to a record NT$7.2 per share in 2025.",
+
+                news_title: "Recent News", 
+                news_1_date: "2025-12-04", 
+                news_1_title: "Foxconn Expands Medical Reach: Scrub Nurse Robots to Enter Taichung VGH Next Spring",
+                news_1_desc: "Actively expanding into digital health, Foxconn announced the introduction of 'scrub nurse robots' at Taichung Veterans General Hospital in Spring 2026. The project combines AI and a 'Four Clouds' collaborative framework to boost clinical efficiency, with plans to expand into nursing and care robots, building a cross-disciplinary digital health ecosystem.",
+                news_2_date: "2026-02", 
+                news_2_title: "[Breaking] Morgan Stanley Bullish on Foxconn: Feb AI Rack Shipments Hit 2,400, Securing Top Spot in Taiwan",
+                news_2_desc: "A recent Morgan Stanley report highlights Foxconn's outstanding performance in AI server rack shipments, securing the top spot among Taiwanese manufacturers with ~2,400 units in February. Driven by strong demand, Q1 shipments are estimated to reach 8,500 units. This AI-driven growth has attracted foreign investment and maintained an 'Outperform' rating.",
                 quiz_title: "Interactive Quiz", quiz_q1: "Q1: In 2025, Foxconn's annual revenue surpassed which major milestone?",
                 quiz_q1_opt1: "NT$ 5 Trillion", quiz_q1_opt2: "NT$ 8 Trillion", quiz_q1_opt3: "NT$ 10 Trillion",
                 quiz_q2: "Q2: Which of the following is NOT part of Foxconn's '3+3' emerging industries strategy?", quiz_q2_opt1: "Electric Vehicles (EV)", quiz_q2_opt2: "Digital Health", quiz_q2_opt3: "Traditional Textiles",
@@ -411,9 +756,49 @@
         let answeredQ1 = false;
         let answeredQ2 = false;
 
-        // --- 功能函數 ---
+        // --- SPA 切換頁面邏輯 ---
+        function navigate(pageId) {
+            // 切換頁面時自動停止導覽語音
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('flex', 'page-fade-in'); 
+            });
 
-        // 1. 手機版選單切換
+            const targetSection = document.getElementById(pageId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                if(pageId === 'home') {
+                    targetSection.classList.add('flex', 'page-fade-in');
+                } else {
+                    targetSection.classList.add('block', 'page-fade-in');
+                }
+            }
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('bg-blue-100', 'dark:bg-gray-700', 'text-blue-600', 'dark:text-blue-400');
+                link.classList.add('text-gray-700', 'dark:text-gray-300');
+                
+                if (link.getAttribute('data-target') === pageId) {
+                    link.classList.add('bg-blue-100', 'dark:bg-gray-700', 'text-blue-600', 'dark:text-blue-400');
+                    link.classList.remove('text-gray-700', 'dark:text-gray-300');
+                }
+            });
+
+            if(window.innerWidth < 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 手機版選單切換 ---
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
         const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -425,44 +810,40 @@
 
         mobileBtn.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
-        
-        // 點擊左側選單連結後自動收起 (手機版)
-        document.querySelectorAll('#sidebar nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if(window.innerWidth < 768) { toggleSidebar(); }
-            });
-        });
 
-        // 2. 切換語言
+        // --- 切換語言 ---
         function toggleLanguage() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[currentLang][key]) {
-                    // 使用 innerHTML 讓 <br> 標籤能正確換行 (用於目標字卡)
                     el.innerHTML = translations[currentLang][key];
                 }
             });
-            // 更新測驗完成訊息
             const resultDiv = document.getElementById('quiz-result');
             if(!resultDiv.classList.contains('hidden')){
                 resultDiv.textContent = translations[currentLang]['quiz_result_msg'];
             }
         }
 
-        // 3. 切換明暗模式
+        // --- 切換明暗模式 ---
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
         }
 
-        // 4. 語音導覽
-        function speakText(textKey) {
+        // --- 語音導覽：朗讀指定元素內的純文字 ---
+        function speakElementContent(elementId) {
             if (!window.speechSynthesis) return;
             window.speechSynthesis.cancel();
             
-            // 語音不唸出 HTML 標籤，用正則表達式把 <br> 清掉
-            let textToSpeak = translations[currentLang][textKey] || textKey;
-            textToSpeak = textToSpeak.replace(/<[^>]*>?/gm, ' ');
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            // 將內容轉為純文字 (移除多餘空白與折行，確保流暢度)
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = element.innerHTML.replace(/<br\s*[\/]?>/gi, " ");
+            let textToSpeak = tempDiv.innerText || tempDiv.textContent;
+            textToSpeak = textToSpeak.replace(/\s+/g, ' ').trim();
             
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             const voices = window.speechSynthesis.getVoices();
@@ -480,33 +861,57 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        // 5. 翻轉字卡
+        // --- 語音導覽：朗讀當前頁面 ---
+        function speakCurrentPage() {
+            if (!window.speechSynthesis) return;
+            
+            // 若正在朗讀中，再次點擊視為停止
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                return;
+            }
+
+            const activeSection = document.querySelector('.page-section:not(.hidden)');
+            if (!activeSection) return;
+
+            if (activeSection.id === 'home') {
+                // 首頁特定朗讀內容
+                let text = translations[currentLang]['hero_title'] + "。" + translations[currentLang]['hero_subtitle'];
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                // 自動尋找當前頁面內的內容區塊來朗讀
+                const contentWrapper = activeSection.querySelector('[id^="content-"]');
+                if (contentWrapper) {
+                    speakElementContent(contentWrapper.id);
+                }
+            }
+        }
+
+        // --- 翻轉字卡 ---
         function flipCard(element) {
             const flipper = element.querySelector('.flipper');
             flipper.classList.toggle('rotate-y-180');
         }
 
-        // 6. 測驗邏輯
+        // --- 測驗邏輯 ---
         function answerQuiz(questionNumber, isCorrect, btnElement) {
             const container = document.getElementById(`q${questionNumber}-container`);
             const buttons = container.querySelectorAll('.quiz-btn');
             
-            // 防止重複作答
             if (questionNumber === 1 && answeredQ1) return;
             if (questionNumber === 2 && answeredQ2) return;
 
-            // 標記已作答
             if (questionNumber === 1) answeredQ1 = true;
             if (questionNumber === 2) answeredQ2 = true;
 
-            // 停用所有按鈕並加上樣式
             buttons.forEach(btn => {
                 btn.disabled = true;
                 btn.classList.add('opacity-50', 'cursor-not-allowed');
                 btn.classList.remove('hover:bg-gray-50', 'dark:hover:bg-gray-700');
             });
 
-            // 替點擊的按鈕加上結果樣式
             btnElement.classList.remove('opacity-50');
             if (isCorrect) {
                 btnElement.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'dark:bg-green-900', 'dark:text-green-100');
@@ -514,13 +919,17 @@
                 btnElement.classList.add('bg-red-100', 'border-red-500', 'text-red-800', 'dark:bg-red-900', 'dark:text-red-100');
             }
 
-            // 檢查是否全答完
             if (answeredQ1 && answeredQ2) {
                 const resultDiv = document.getElementById('quiz-result');
                 resultDiv.textContent = translations[currentLang]['quiz_result_msg'];
                 resultDiv.classList.remove('hidden');
             }
         }
+
+        // --- 網頁載入後預設顯示首頁 ---
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('home');
+        });
     </script>
 </body>
 </html>
