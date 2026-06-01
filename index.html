@@ -16,25 +16,25 @@
                         primary: '#003366', 
                         primaryDark: '#002244',
                         blue: {
-                            50: '#f4f6f9',  // 極淺灰藍 (背景用)
+                            50: '#f4f6f9',
                             100: '#e1e7ef',
                             200: '#c3d0df',
                             300: '#a5b9cf',
                             400: '#87a1bf',
-                            500: '#004080', // 鴻海深藍 (漸層/亮部)
-                            600: '#003366', // 鴻海深藍 (主色/按鈕)
-                            700: '#002244', // 鴻海深藍 (懸停/深色)
+                            500: '#004080',
+                            600: '#003366',
+                            700: '#002244',
                             800: '#001122',
                             900: '#000811',
                         },
                         sky: {
-                            50: '#fff0f0',  // 極淺紅 (卡片背景)
+                            50: '#fff0f0',
                             100: '#ffe0e0',
                             200: '#ffc2c2',
                             300: '#ffa3a3',
                             400: '#ff6666',
-                            500: '#E60012', // 鴻海紅 (主色/漸層/邊框)
-                            600: '#cc0010', // 鴻海紅 (懸停)
+                            500: '#E60012',
+                            600: '#cc0010',
                             700: '#a3000d',
                             800: '#7a000a',
                             900: '#520006',
@@ -63,15 +63,9 @@
         .modal-fade-in { animation: modalFadeIn 0.3s ease-out forwards; }
         
         /* 明亮模式下的淺藍色背景覆蓋 (將原本的純白替換為高質感的淺冰藍色) */
-        html:not(.dark) .bg-white {
-            background-color: #f4f8ff !important;
-        }
-        html:not(.dark) .bg-white/90 {
-            background-color: rgba(244, 248, 255, 0.9) !important;
-        }
-        html:not(.dark) body.bg-blue-50 {
-            background-color: #eaf2fb !important;
-        }
+        html:not(.dark) .bg-white { background-color: #f4f8ff !important; }
+        html:not(.dark) .bg-white\/90 { background-color: rgba(244, 248, 255, 0.9) !important; }
+        html:not(.dark) body.bg-blue-50 { background-color: #eaf2fb !important; }
     </style>
 </head>
 <body class="bg-blue-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300 flex min-h-screen">
@@ -169,7 +163,7 @@
                     </div>
                 </div>
 
-                <!-- 靜態平面地圖區塊 -->
+                <!-- 靜態平面地圖區塊 (無圖片版) -->
                 <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-6 md:p-8 overflow-hidden border border-gray-100 dark:border-gray-700">
                     <div class="flex items-center justify-between mb-4 md:mb-6">
                         <h3 data-i18n="bi_sec4_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 flex items-center"><i data-lucide="globe" class="w-6 h-6 mr-3"></i>三、全球市場版圖</h3>
@@ -442,56 +436,215 @@
                 </div>
             </section>
 
-            <!-- 11. 互動測驗 (已擴充為 5 題) -->
-            <section id="quiz" class="page-section hidden py-20 px-8 max-w-4xl mx-auto min-h-[70vh]">
-                <div class="flex justify-center items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-quiz')">
+            <!-- 11. 互動測驗與字卡 -->
+            <section id="quiz" class="page-section hidden py-20 px-8 max-w-6xl mx-auto min-h-[70vh]">
+                <div class="flex justify-center items-center mb-12 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-quiz')">
                     <i data-lucide="award" class="w-8 h-8 mr-3"></i>
-                    <h2 data-i18n="quiz_title" class="text-3xl font-bold text-center text-gray-800 dark:text-gray-100">知識小測驗</h2>
+                    <h2 data-i18n="quiz_main_title" class="text-3xl font-bold text-center text-gray-800 dark:text-gray-100">互動測驗與學習字卡</h2>
                     <i data-lucide="volume-2" class="w-6 h-6 ml-3"></i><span class="ml-2 text-sm font-bold bg-blue-100 dark:bg-gray-700 px-2 py-1 rounded-full text-blue-700 dark:text-blue-300" data-i18n="btn_read_content">朗讀內容</span>
                 </div>
-                <div id="content-quiz" class="space-y-6">
-                    <div class="bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" id="q1-container">
-                        <h4 data-i18n="quiz_q1" class="text-xl font-bold mb-6">Q1: 請問鴻海在2025年的全年營收首度突破了多少大關？</h4>
-                        <div class="space-y-3">
-                            <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt1">5兆新台幣</span></button>
-                            <button onclick="answerQuiz(1, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt2">8兆新台幣</span></button>
-                            <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt3">10兆新台幣</span></button>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" id="q2-container">
-                        <h4 data-i18n="quiz_q2" class="text-xl font-bold mb-6">Q2: 鴻海近年推動的「3+3」策略中，「不包含」下列哪個新興產業？</h4>
-                        <div class="space-y-3">
-                            <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt1">電動車 (EV)</span></button>
-                            <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt2">數位醫療</span></button>
-                            <button onclick="answerQuiz(2, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt3">傳統紡織業</span></button>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" id="q3-container">
-                        <h4 data-i18n="quiz_q3" class="text-xl font-bold mb-6">Q3: 鴻海在組織架構上採用矩陣式管理，其中負責「在地營運與生產布局，因應地緣政治風險」的是哪一個單位？</h4>
-                        <div class="space-y-3">
-                            <button onclick="answerQuiz(3, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q3_opt1">BU (事業單位)</span></button>
-                            <button onclick="answerQuiz(3, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q3_opt2">FU (功能部門)</span></button>
-                            <button onclick="answerQuiz(3, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q3_opt3">GU (地理市場別)</span></button>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" id="q4-container">
-                        <h4 data-i18n="quiz_q4" class="text-xl font-bold mb-6">Q4: 鴻海的價值活動鏈中，涵蓋共同設計、開發、製造與全球運籌的「一站式整合服務」商業模式簡稱為何？</h4>
-                        <div class="space-y-3">
-                            <button onclick="answerQuiz(4, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q4_opt1">BOL 模式</span></button>
-                            <button onclick="answerQuiz(4, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q4_opt2">eCMMS 模式</span></button>
-                            <button onclick="answerQuiz(4, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q4_opt3">MIH 平台</span></button>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" id="q5-container">
-                        <h4 data-i18n="quiz_q5" class="text-xl font-bold mb-6">Q5: 在五力分析中，鴻海面對哪一種力量的威脅被評估為「非常高」，因此需要持續提升不可替代性？</h4>
-                        <div class="space-y-3">
-                            <button onclick="answerQuiz(5, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q5_opt1">買方議價能力 (如 Apple 等品牌商)</span></button>
-                            <button onclick="answerQuiz(5, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q5_opt2">供應商議價能力 (如 NVIDIA 等)</span></button>
-                            <button onclick="answerQuiz(5, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q5_opt3">潛在進入者威脅</span></button>
+                
+                <div id="content-quiz" class="space-y-16">
+                    
+                    <!-- 翻轉字卡學習 -->
+                    <div>
+                        <h3 data-i18n="fc_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-8 border-b pb-2 flex items-center"><i data-lucide="book-open" class="w-6 h-6 mr-3"></i>一、翻轉字卡學習 (點擊字卡翻面)</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            
+                            <!-- Card 1 -->
+                            <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                                <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                                    <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                        <i data-lucide="layers" class="w-12 h-12 mb-4 text-blue-500"></i>
+                                        <h4 data-i18n="fc_1_f" class="text-xl font-bold text-center">eCMMS 經營模式</h4>
+                                    </div>
+                                    <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-2xl shadow-xl bg-blue-50 dark:bg-gray-800 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700 overflow-y-auto">
+                                        <p data-i18n="fc_1_b" class="text-sm md:text-base leading-relaxed text-center font-medium">鴻海核心的一站式整合服務系統。涵蓋從上游精密零組件、中游模組到下游整機組裝（如手機、AI伺服器）的「垂直整合」與全球物流配送。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 2 -->
+                            <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                                <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                                    <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                        <i data-lucide="rocket" class="w-12 h-12 mb-4 text-blue-500"></i>
+                                        <h4 data-i18n="fc_2_f" class="text-xl font-bold text-center">「3+3」轉型策略</h4>
+                                    </div>
+                                    <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-2xl shadow-xl bg-blue-50 dark:bg-gray-800 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700 overflow-y-auto">
+                                        <p data-i18n="fc_2_b" class="text-sm md:text-base leading-relaxed text-center font-medium">鴻海擺脫傳統代工形象的關鍵布局。<br>三大新興產業：電動車、數位健康、機器人。<br>三大核心技術：人工智慧、半導體、次世代通訊。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                                <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                                    <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                        <i data-lucide="globe" class="w-12 h-12 mb-4 text-blue-500"></i>
+                                        <h4 data-i18n="fc_3_f" class="text-xl font-bold text-center">China + 1 策略</h4>
+                                    </div>
+                                    <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-2xl shadow-xl bg-blue-50 dark:bg-gray-800 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700 overflow-y-auto">
+                                        <p data-i18n="fc_3_b" class="text-sm md:text-base leading-relaxed text-center font-medium">為了分散地緣政治風險、降低對單一製造基地（中國）的依賴，鴻海積極擴大在印度、越南、墨西哥等地的海外產能，強化全球供應鏈韌性。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                                <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                                    <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                        <i data-lucide="handshake" class="w-12 h-12 mb-4 text-blue-500"></i>
+                                        <h4 data-i18n="fc_4_f" class="text-xl font-bold text-center">BOL 營運模式</h4>
+                                    </div>
+                                    <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-2xl shadow-xl bg-blue-50 dark:bg-gray-800 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700 overflow-y-auto">
+                                        <p data-i18n="fc_4_b" class="text-sm md:text-base leading-relaxed text-center font-medium">構建、營運、本地化（Build-Operate-Localize）。跨足電動車等領域的國際合作模式，透過與當地夥伴合作、融入在地供應鏈，降低法規與投資風險。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
+                                <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
+                                    <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 rounded-2xl shadow-xl border-2 border-blue-200 dark:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                                        <i data-lucide="repeat" class="w-12 h-12 mb-4 text-blue-500"></i>
+                                        <h4 data-i18n="fc_5_f" class="text-xl font-bold text-center">動態能力<br><span class="text-base font-normal text-gray-500">(Dynamic Capabilities)</span></h4>
+                                    </div>
+                                    <div class="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-6 rounded-2xl shadow-xl bg-blue-50 dark:bg-gray-800 text-blue-900 dark:text-white border border-blue-200 dark:border-blue-700 overflow-y-auto">
+                                        <p data-i18n="fc_5_b" class="text-sm md:text-base leading-relaxed text-center font-medium">企業在面對快速變動環境時，「改變既有常規與能力」的學習與轉型能力。包含感知能力、擷取能力與轉型能力。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
 
-                    <div id="quiz-result" class="hidden text-center mt-8 p-6 bg-blue-100 border border-blue-300 text-blue-800 rounded-2xl font-bold text-xl animate-pulse">測驗完成！感謝您的參與。</div>
+                    <!-- 互動問答小測驗 (題庫，隨機抽出顯示) -->
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex items-center justify-between mb-8 border-b pb-2">
+                            <h3 data-i18n="quiz_title2" class="text-2xl font-bold text-blue-700 dark:text-blue-400 flex items-center"><i data-lucide="help-circle" class="w-6 h-6 mr-3"></i>二、互動問答小測驗 (隨機出題)</h3>
+                            <button onclick="shuffleAndShowQuiz()" class="px-4 py-2 bg-blue-100 hover:bg-blue-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-800 dark:text-blue-200 rounded-lg text-sm font-bold flex items-center transition"><i data-lucide="refresh-cw" class="w-4 h-4 mr-2"></i>重新測驗</button>
+                        </div>
+                        
+                        <div id="quiz-pool" class="space-y-6">
+                            <!-- Q1 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="1">
+                                <h4 data-i18n="quiz_q1" class="text-xl font-bold mb-6">Q: 請問鴻海在2025年的全年營收首度突破了多少大關？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt1">5兆新台幣</span></button>
+                                    <button onclick="answerQuiz(1, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt2">8兆新台幣</span></button>
+                                    <button onclick="answerQuiz(1, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q1_opt3">10兆新台幣</span></button>
+                                </div>
+                            </div>
+                            <!-- Q2 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="2">
+                                <h4 data-i18n="quiz_q2" class="text-xl font-bold mb-6">Q: 鴻海近年推動的「3+3」策略中，「不包含」下列哪個新興產業？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt1">電動車 (EV)</span></button>
+                                    <button onclick="answerQuiz(2, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt2">數位醫療</span></button>
+                                    <button onclick="answerQuiz(2, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q2_opt3">傳統紡織業</span></button>
+                                </div>
+                            </div>
+                            <!-- Q3 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="3">
+                                <h4 data-i18n="quiz_q3" class="text-xl font-bold mb-6">Q: 鴻海在組織架構上採用矩陣式管理，其中負責「在地營運與生產布局，因應地緣政治風險」的是哪一個單位？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(3, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q3_opt1">BU (事業單位)</span></button>
+                                    <button onclick="answerQuiz(3, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q3_opt2">FU (功能部門)</span></button>
+                                    <button onclick="answerQuiz(3, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q3_opt3">GU (地理市場別)</span></button>
+                                </div>
+                            </div>
+                            <!-- Q4 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="4">
+                                <h4 data-i18n="quiz_q4" class="text-xl font-bold mb-6">Q: 鴻海的價值活動鏈中，涵蓋共同設計、開發、製造與全球運籌的「一站式整合服務」商業模式簡稱為何？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(4, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q4_opt1">BOL 模式</span></button>
+                                    <button onclick="answerQuiz(4, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q4_opt2">eCMMS 模式</span></button>
+                                    <button onclick="answerQuiz(4, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q4_opt3">MIH 平台</span></button>
+                                </div>
+                            </div>
+                            <!-- Q5 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="5">
+                                <h4 data-i18n="quiz_q5" class="text-xl font-bold mb-6">Q: 在五力分析中，鴻海面對哪一種力量的威脅被評估為「非常高」，因此需要持續提升不可替代性？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(5, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q5_opt1">買方議價能力 (如 Apple 等品牌商)</span></button>
+                                    <button onclick="answerQuiz(5, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q5_opt2">供應商議價能力 (如 NVIDIA 等)</span></button>
+                                    <button onclick="answerQuiz(5, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="quiz_q5_opt3">潛在進入者威脅</span></button>
+                                </div>
+                            </div>
+                            <!-- Q6 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="6">
+                                <h4 data-i18n="quiz_q6" class="text-xl font-bold mb-6">Q: 根據2025年第四季的財務回顧，鴻海哪一個產品領域的營收占比最高（約42%），正式超越消費性智能產品？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(6, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q6_opt1">A. 雲端網路產品領域</span></button>
+                                    <button onclick="answerQuiz(6, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q6_opt2">B. 消費智能產品領域</span></button>
+                                    <button onclick="answerQuiz(6, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q6_opt3">C. 元件及其他產品領域</span></button>
+                                    <button onclick="answerQuiz(6, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q6_opt4">D. 電腦終端產品領域</span></button>
+                                </div>
+                            </div>
+                            <!-- Q7 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="7">
+                                <h4 data-i18n="quiz_q7" class="text-xl font-bold mb-6">Q: 在商業模式中，鴻海主導存貨使用、投入關鍵製程技術，並產出高度整合的商品與勞務組合，這代表其擔任了什麼角色？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(7, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q7_opt1">A. 單純勞務提供者</span></button>
+                                    <button onclick="answerQuiz(7, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q7_opt2">B. 品牌授權商</span></button>
+                                    <button onclick="answerQuiz(7, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q7_opt3">C. 交易代理人 (Agent)</span></button>
+                                    <button onclick="answerQuiz(7, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q7_opt4">D. 交易主理人 (Principal)</span></button>
+                                </div>
+                            </div>
+                            <!-- Q8 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="8">
+                                <h4 data-i18n="quiz_q8" class="text-xl font-bold mb-6">Q: 鴻海為了應對「地緣政治海嘯」並滿足客戶對供應鏈韌性的要求，採取了下列哪一項核心行動？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(8, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q8_opt1">A. 完全放棄消費性電子產品的代工業務</span></button>
+                                    <button onclick="answerQuiz(8, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q8_opt2">B. 停止與北美所有雲端服務供應商（CSP）的合作</span></button>
+                                    <button onclick="answerQuiz(8, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q8_opt3">C. 加速落實「China + 1」並擴大印度、越南、墨西哥等地產能</span></button>
+                                    <button onclick="answerQuiz(8, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q8_opt4">D. 將所有生產基地全面撤回台灣本土</span></button>
+                                </div>
+                            </div>
+                            <!-- Q9 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="9">
+                                <h4 data-i18n="quiz_q9" class="text-xl font-bold mb-6">Q: 關於鴻海在2025年財務表現的敘述，下列何者正確？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(9, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q9_opt1">A. 淨利率呈現大幅度衰退，營運陷入危機</span></button>
+                                    <button onclick="answerQuiz(9, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q9_opt2">B. 因消費性電子疲弱，2025全年營收創下歷史新低</span></button>
+                                    <button onclick="answerQuiz(9, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q9_opt3">C. AI伺服器雖帶來高營收，但高單價零組件成本也壓低了整體毛利率</span></button>
+                                    <button onclick="answerQuiz(9, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q9_opt4">D. 毛利額因高成本而大幅縮水，年減超過10%</span></button>
+                                </div>
+                            </div>
+                            <!-- Q10 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="10">
+                                <h4 data-i18n="quiz_q10" class="text-xl font-bold mb-6">Q: 鴻海積極推動的「3+3」策略中，所謂的「三大新興產業」指的是哪三個領域？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(10, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q10_opt1">A. 半導體、人工智慧、次世代通訊</span></button>
+                                    <button onclick="answerQuiz(10, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q10_opt2">B. 電動車、數位健康、機器人</span></button>
+                                    <button onclick="answerQuiz(10, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q10_opt3">C. 智慧製造、關燈工廠、綠色能源</span></button>
+                                    <button onclick="answerQuiz(10, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q10_opt4">D. 雲端網路、電腦終端、消費智能</span></button>
+                                </div>
+                            </div>
+                            <!-- Q11 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="11">
+                                <h4 data-i18n="quiz_q11" class="text-xl font-bold mb-6">Q: 鴻海在海外布局時，過去在印度曾因基層員工食宿問題引發罷工。為降低法規與管理風險，後續採取了什麼改善措施？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(11, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q11_opt1">A. 要求品牌客戶自行負責當地勞工管理</span></button>
+                                    <button onclick="answerQuiz(11, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q11_opt2">B. 將所有印度產能移轉至越南與墨西哥</span></button>
+                                    <button onclick="answerQuiz(11, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q11_opt3">C. 全面實行關燈工廠，不再聘用任何當地勞工</span></button>
+                                    <button onclick="answerQuiz(11, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q11_opt4">D. 興建大型現代化員工宿舍 (Mega Hostel) 並聘用在地高階主管</span></button>
+                                </div>
+                            </div>
+                            <!-- Q12 -->
+                            <div class="quiz-item hidden bg-white dark:bg-gray-800 border shadow-xl rounded-2xl p-8" data-qid="12">
+                                <h4 data-i18n="quiz_q12" class="text-xl font-bold mb-6">Q: 廣達積極與大廠合作高效能運算，和碩則採取低毛利搶奪Apple訂單。這對鴻海而言屬於波特五力中的哪一種環境威脅？</h4>
+                                <div class="space-y-3">
+                                    <button onclick="answerQuiz(12, true, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q12_opt1">A. 既有同業競爭者的激烈競爭行為</span></button>
+                                    <button onclick="answerQuiz(12, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q12_opt2">B. 購買者（客戶）的垂直整合威脅</span></button>
+                                    <button onclick="answerQuiz(12, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q12_opt3">C. 供應商的談判能力過高</span></button>
+                                    <button onclick="answerQuiz(12, false, this)" class="quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg"><span data-i18n="q12_opt4">D. 新進對手的極低生存進入壁壘</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="quiz-result" class="hidden text-center mt-8 p-6 bg-blue-100 border border-blue-300 text-blue-800 rounded-2xl font-bold text-xl animate-pulse">測驗完成！感謝您的參與。</div>
+                    </div>
                 </div>
             </section>
 
@@ -572,7 +725,7 @@
 
     <!-- 隱藏的內容模板庫 (供 Modal 呼叫) -->
     <div class="hidden">
-        <!-- 企業簡介與組織架構模版 (新增修復的部分) -->
+        <!-- 企業簡介與組織架構模版 -->
         <div id="tpl-about-intro">
             <h3 data-i18n="about_sec1_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-6 border-b pb-2">一、鴻海簡介與沿革</h3>
             <p data-i18n="about_sec1_p1" class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">由郭台銘於1974年創立，初期以電子連接器起家，逐步擴展至電腦零組件與消費性電子，成為全球最大的EMS企業，並長期與Apple、Sony等國際品牌合作。近年積極推動「3+3」轉型策略（電動車、數位健康、機器人），結合AI、半導體與新世代通訊技術升級競爭力。</p>
@@ -615,7 +768,6 @@
                 </div>
             </div>
         </div>
-        <!-- 企業簡介與組織架構模版 (結束) -->
 
         <!-- 產品與商業模式模版 -->
         <div id="tpl-prod-mix">
@@ -730,7 +882,7 @@
             <ul class="space-y-6 text-lg text-gray-700 dark:text-gray-300">
                 <li class="flex items-start"><i data-lucide="radar" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_s">感知 (Sensing)：</span><span data-i18n="res_dc_s_d">敏銳預見手機增長趨緩與地緣風險，超前佈署 3+3 新興產業與海外佈局。</span></div></li>
                 <li class="flex items-start"><i data-lucide="hand-grab" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_se">擷取 (Seizing)：</span><span data-i18n="res_dc_se_d">利用 BOL 模式與 MIH 平台轉化新商機，建立在地供應鏈與開放生態系。</span></div></li>
-                <li class="flex items-start"><i data-lucide="refresh-cw" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_t">轉型 (Transforming)：</span><span data-i18n="res_dc_t_d">推動 Foxconn 2.0 數位轉型，重組生產常規打造智慧「燈塔工廠」，升級人力資本。</span></div></li>
+                <li class="flex items-start"><i data-lucide="refresh-cw" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_t">轉型 (Transforming)：</span><span data-i18n="res_dc_t_d">推推動 Foxconn 2.0 數位轉型，重組生產常規打造智慧「燈塔工廠」，升級人力資本。</span></div></li>
             </ul>
         </div>
 
@@ -907,13 +1059,30 @@
 
                 news_title: "近期重大新聞", news_1_date: "2025-12-04", news_1_title: "鴻海擴大醫療布局 刷手機器人明年春季導入台中榮總", news_1_desc: "鴻海集團宣布將於2026年春季在台中榮總導入「刷手機器人」，專責手術室器械處理，結合AI提升臨床效率。", news_2_date: "2026-02", news_2_title: "大摩報告看好鴻海，2月AI機櫃出貨2400台穩居台廠龍頭", news_2_desc: "摩根士丹利指出鴻海AI伺服器出貨優異，二月份出貨量穩居台廠龍頭，法人預估全年有望倍增。",
                 
-                quiz_title: "知識小測驗", 
-                quiz_q1: "Q1: 請問鴻海在2025年的全年營收首度突破了多少大關？", quiz_q1_opt1: "5兆新台幣", quiz_q1_opt2: "8兆新台幣", quiz_q1_opt3: "10兆新台幣", 
-                quiz_q2: "Q2: 鴻海近年推動的「3+3」策略中，「不包含」下列哪個新興產業？", quiz_q2_opt1: "電動車 (EV)", quiz_q2_opt2: "數位醫療", quiz_q2_opt3: "傳統紡織業", 
+                // --- 新增: 字卡與題庫雙語翻譯 ---
+                quiz_main_title: "互動測驗與學習字卡",
+                fc_title: "一、翻轉字卡學習 (點擊字卡翻面)",
+                fc_1_f: "eCMMS 經營模式", fc_1_b: "鴻海核心的一站式整合服務系統。涵蓋從上游精密零組件、中游模組到下游整機組裝（如手機、AI伺服器）的「垂直整合」與全球物流配送。",
+                fc_2_f: "「3+3」轉型策略", fc_2_b: "鴻海擺脫傳統代工形象的關鍵布局。<br>三大新興產業：電動車、數位健康、機器人。<br>三大核心技術：人工智慧、半導體、次世代通訊。",
+                fc_3_f: "China + 1 策略", fc_3_b: "為了分散地緣政治風險、降低對單一製造基地（中國）的依賴，鴻海積極擴大在印度、越南、墨西哥等地的海外產能，強化全球供應鏈韌性。",
+                fc_4_f: "BOL 營運模式", fc_4_b: "構建、營運、本地化（Build-Operate-Localize）。跨足電動車等領域的國際合作模式，透過與當地夥伴合作、融入在地供應鏈，降低法規與投資風險。",
+                fc_5_f: "動態能力<br><span class='text-base font-normal text-gray-500'>(Dynamic Capabilities)</span>", fc_5_b: "企業在面對快速變動環境時，「改變既有常規與能力」的學習與轉型能力。包含感知能力、擷取能力與轉型能力。",
+                
+                quiz_title2: "二、互動問答小測驗 (隨機出題)",
+                quiz_q1: "Q: 請問鴻海在2025年的全年營收首度突破了多少大關？", quiz_q1_opt1: "5兆新台幣", quiz_q1_opt2: "8兆新台幣", quiz_q1_opt3: "10兆新台幣", 
+                quiz_q2: "Q: 鴻海近年推動的「3+3」策略中，「不包含」下列哪個新興產業？", quiz_q2_opt1: "電動車 (EV)", quiz_q2_opt2: "數位醫療", quiz_q2_opt3: "傳統紡織業", 
                 quiz_q3: "Q3: 鴻海在組織架構上採用矩陣式管理，其中負責「在地營運與生產布局，因應地緣政治風險」的是哪一個單位？", quiz_q3_opt1: "BU (事業單位)", quiz_q3_opt2: "FU (功能部門)", quiz_q3_opt3: "GU (地理市場別)", 
                 quiz_q4: "Q4: 鴻海的價值活動鏈中，涵蓋共同設計、開發、製造與全球運籌的「一站式整合服務」商業模式簡稱為何？", quiz_q4_opt1: "BOL 模式", quiz_q4_opt2: "eCMMS 模式", quiz_q4_opt3: "MIH 平台", 
                 quiz_q5: "Q5: 在五力分析中，鴻海面對哪一種力量的威脅被評估為「非常高」，因此需要持續提升不可替代性？", quiz_q5_opt1: "買方議價能力 (如 Apple 等 brand 商)", quiz_q5_opt2: "供應商議價能力 (如 NVIDIA 等)", quiz_q5_opt3: "潛在進入者威脅", 
-                quiz_result_msg: "恭喜您完成全部測驗！感謝您的參與 🎉",
+                
+                quiz_q6: "Q: 根據2025年第四季的財務回顧，鴻海哪一個產品領域的營收占比最高（約42%），正式超越消費性智能產品？", q6_opt1: "A. 雲端網路產品領域", q6_opt2: "B. 消費智能產品領域", q6_opt3: "C. 元件及其他產品領域", q6_opt4: "D. 電腦終端產品領域",
+                quiz_q7: "Q: 在商業模式中，鴻海主導存貨使用、投入關鍵製程技術，並產出高度整合的商品與勞務組合，這代表其擔任了什麼角色？", q7_opt1: "A. 單純勞務提供者", q7_opt2: "B. 品牌授權商", q7_opt3: "C. 交易代理人 (Agent)", q7_opt4: "D. 交易主理人 (Principal)",
+                quiz_q8: "Q: 鴻海為了應對「地緣政治海嘯」並滿足客戶對供應鏈韌性的要求，採取了下列哪一項核心行動？", q8_opt1: "A. 完全放棄消費性電子產品的代工業務", q8_opt2: "B. 停止與北美所有雲端服務供應商（CSP）的合作", q8_opt3: "C. 加速落實「China + 1」並擴大印度、越南、墨西哥等地產能", q8_opt4: "D. 將所有生產基地全面撤回台灣本土",
+                quiz_q9: "Q: 關於鴻海在2025年財務表現的敘述，下列何者正確？", q9_opt1: "A. 淨利率呈現大幅度衰退，營運陷入危機", q9_opt2: "B. 因消費性電子疲弱，2025全年營收創下歷史新低", q9_opt3: "C. AI伺服器雖然帶來高營收，但高單價零組件成本也壓低了整體毛利率", q9_opt4: "D. 毛利額因高成本而大幅縮水，年減超過10%",
+                quiz_q10: "Q: 鴻海積極推動的「3+3」策略中，所謂的「三大新興產業」指的是哪三個領域？", q10_opt1: "A. 半導體、人工智慧、次世代通訊", q10_opt2: "B. 電動車、數位健康、機器人", q10_opt3: "C. 智慧製造、關燈工廠、綠色能源", q10_opt4: "D. 雲端網路、電腦終端、消費智能",
+                quiz_q11: "Q: 鴻海在海外布局時，過去在印度曾因基層員工食宿問題引發罷工。為降低法規與管理風險，後續採取了什麼改善措施？", q11_opt1: "A. 要求品牌客戶自行負責當地勞工管理", q11_opt2: "B. 將所有印度產能移轉至越南與墨西哥", q11_opt3: "C. 全面實行關燈工廠，不再聘用任何當地勞工", q11_opt4: "D. 興建大型現代化員工宿舍 (Mega Hostel) 並聘用在地高階主管",
+                quiz_q12: "Q: 廣達積極與大廠合作高效能運算，和碩則採取低毛利搶奪Apple訂單。這對鴻海而言屬於波特五力中的哪一種環境威脅？", q12_opt1: "A. 既有同業競爭者的激烈競爭行為", q12_opt2: "B. 購買者（客戶）的垂直整合威脅", q12_opt3: "C. 供應商的談判能力過高", q12_opt4: "D. 新進對手的極低生存進入壁壘",
+                quiz_result_msg: "恭喜您完成測驗！感謝您的參與 🎉",
 
                 team_title: "團隊介紹與專案反思", collab_title: "團隊協作模式", team_members: "組員：楊皓心、鍾幼萱、邵欣逸、林冠宇、陳冠蓁、林詩芸、游育恩", collab_text: "我們並非單純切割任務，而是採用敏捷式協作。初期共同研究 TPO 資料並決定分析工具；進入網頁製作階段時，我們共同檢閱內容，確保品質與設計創意的整體一致性。", ai_title: "AI 工具運用聲明", ai_text: "本專案在資料搜集階段使用了 ChatGPT 協助摘要冗長財報；網頁結構與互動功能則透過 Claude/Gemini 輔助生成基礎程式碼，隨後由團隊成員調整雙語語意，符合學術誠信。", ref_title: "引用與參考資料", ref_1: "國策管 - 1142 互動網頁競賽規則與 TP0 提案", ref_2: "Moodle 課程討論區", ref_3: "鴻海科技集團 官方網站與財務報告", footer_text: "課程名稱：1142 國際策略管理 | 授課教師：梅筱珍",
                 
@@ -967,12 +1136,28 @@
 
                 news_title: "Recent News", news_1_date: "2025-12-04", news_1_title: "Foxconn expands medical reach: Scrub robots to Taichung VGH", news_1_desc: "Introducing AI surgical robots to hospitals in Spring 2026.", news_2_date: "2026-02", news_2_title: "Morgan Stanley Bullish on Foxconn AI Racks", news_2_desc: "Leading Taiwanese manufacturer in AI server shipments.",
                 
-                quiz_title: "Interactive Quiz", 
-                quiz_q1: "Q1: In 2025, Foxconn's revenue surpassed?", quiz_q1_opt1: "5T NTD", quiz_q1_opt2: "8T NTD", quiz_q1_opt3: "10T NTD", 
-                quiz_q2: "Q2: Which is NOT part of '3+3'?", quiz_q2_opt1: "EV", quiz_q2_opt2: "Digital Health", quiz_q2_opt3: "Textiles", 
-                quiz_q3: "Q3: In Foxconn's matrix organization, which unit handles 'local operations and mitigating geopolitical risks'?", quiz_q3_opt1: "Business Unit (BU)", quiz_q3_opt2: "Functional Unit (FU)", quiz_q3_opt3: "Geographic Unit (GU)", 
-                quiz_q4: "Q4: What is Foxconn's integrated 'design, develop, manufacture, and global logistics' business model called?", quiz_q4_opt1: "BOL Model", quiz_q4_opt2: "eCMMS Model", quiz_q4_opt3: "MIH Platform", 
-                quiz_q5: "Q5: In the Five Forces analysis, which threat is evaluated as 'Very High' for Foxconn?", quiz_q5_opt1: "Bargaining Power of Buyers", quiz_q5_opt2: "Bargaining Power of Suppliers", quiz_q5_opt3: "Threat of New Entrants", 
+                quiz_main_title: "Interactive Quiz & Flashcards",
+                fc_title: "I. Flashcard Learning (Click to Flip)",
+                fc_1_f: "eCMMS Model", fc_1_b: "Foxconn's core one-stop integration system, covering components, modules, and final assembly operations globally.",
+                fc_2_f: "3+3 Strategy", fc_2_b: "Key to transforming from EMS to Tech Platform. 3 Industries: EV, Digital Health, Robotics. 3 Techs: AI, Semi, Next-gen Comm.",
+                fc_3_f: "China + 1 Strategy", fc_3_b: "Diversifying manufacturing away from China to India, Vietnam, and Mexico to mitigate geopolitical risks and boost resilience.",
+                fc_4_f: "BOL Model", fc_4_b: "Build-Operate-Localize. International collaboration model to integrate into local supply chains and lower regulatory risks.",
+                fc_5_f: "Dynamic Capabilities", fc_5_b: "The ability to sense, seize, and transform in rapidly changing environments to maintain long-term competitiveness.",
+                
+                quiz_title2: "II. Interactive Quiz (Randomized)",
+                quiz_q1: "Q: In 2025, Foxconn's revenue surpassed?", quiz_q1_opt1: "5T NTD", quiz_q1_opt2: "8T NTD", quiz_q1_opt3: "10T NTD", 
+                quiz_q2: "Q: Which is NOT part of '3+3'?", quiz_q2_opt1: "EV", quiz_q2_opt2: "Digital Health", quiz_q2_opt3: "Textiles", 
+                quiz_q3: "Q3: In matrix organization, which unit handles local operations?", quiz_q3_opt1: "BU", quiz_q3_opt2: "FU", quiz_q3_opt3: "GU", 
+                quiz_q4: "Q4: What is Foxconn's integrated business model called?", quiz_q4_opt1: "BOL Model", quiz_q4_opt2: "eCMMS Model", quiz_q4_opt3: "MIH Platform", 
+                quiz_q5: "Q5: In Five Forces, which threat is 'Very High'?", quiz_q5_opt1: "Buyer Power", quiz_q5_opt2: "Supplier Power", quiz_q5_opt3: "New Entrants", 
+                
+                quiz_q6: "Q: According to the 2025 financial review, which product area had the highest revenue share (~42%)?", q6_opt1: "A. Cloud Networking", q6_opt2: "B. Consumer Electronics", q6_opt3: "C. Components", q6_opt4: "D. Computing",
+                quiz_q7: "Q: By leading inventory usage and investing in core processes, what role does Foxconn play?", q7_opt1: "A. Labor Provider", q7_opt2: "B. Brand Licensor", q7_opt3: "C. Agent", q7_opt4: "D. Principal",
+                quiz_q8: "Q: To address geopolitical risks and ensure resilience, what core action did Foxconn take?", q8_opt1: "A. Abandon consumer electronics", q8_opt2: "B. Stop CSP partnerships", q8_opt3: "C. Accelerate 'China + 1' layout in India/Vietnam/Mexico", q8_opt4: "D. Move all bases to Taiwan",
+                quiz_q9: "Q: Which statement about Foxconn's 2025 financial performance is correct?", q9_opt1: "A. Net margin plummeted drastically", q9_opt2: "B. Revenue hit a record low", q9_opt3: "C. AI servers boosted revenue but slightly pressured gross margin", q9_opt4: "D. Gross profit shrank by 10%",
+                quiz_q10: "Q: What are the three emerging industries in the '3+3' strategy?", q10_opt1: "A. Semi, AI, Comms", q10_opt2: "B. EV, Digital Health, Robotics", q10_opt3: "C. Smart Mfg, Green Energy, Automation", q10_opt4: "D. Cloud, Computing, Consumer",
+                quiz_q11: "Q: How did Foxconn improve labor management in India to reduce risks?", q11_opt1: "A. Let clients manage it", q11_opt2: "B. Shift to Vietnam", q11_opt3: "C. Zero local hires", q11_opt4: "D. Build Mega Hostels & hire local executives",
+                quiz_q12: "Q: Quanta and Pegatron aggressively competing for orders represents which of the Five Forces?", q12_opt1: "A. Rivalry among existing competitors", q12_opt2: "B. Buyer integration", q12_opt3: "C. Supplier power", q12_opt4: "D. Threat of new entrants",
                 quiz_result_msg: "Congratulations! You have completed the quiz. 🎉",
                 
                 team_title: "Team & Reflection", collab_title: "Collaboration Model", team_members: "Members: Hao-Xin Yang, You-Hsuan Chung, Hsin-Yi Shao, Kuan-Yu Lin, Kuan-Chen Chen, Shih-Yun Lin, Yu-En Yu", collab_text: "Agile collaboration, joint research & GitHub code reviews.", ai_title: "AI Usage", ai_text: "Used ChatGPT for finance summaries, Claude/Gemini for UI basics.", ref_title: "References", ref_1: "1142 TP0 Guidelines", ref_2: "Moodle Forum", ref_3: "Foxconn Official Site", footer_text: "1142 Strategic Management | Instructor: Hsiao-Chen Mei",
@@ -988,7 +1173,10 @@
         };
 
         let currentLang = 'zh';
-        let answeredQ1 = false, answeredQ2 = false, answeredQ3 = false, answeredQ4 = false, answeredQ5 = false;
+        
+        // 記錄目前答對題數的狀態集合
+        let answeredQuestions = new Set();
+        let totalVisibleQuiz = 5;
 
         function navigate(pageId) {
             if (window.speechSynthesis) window.speechSynthesis.cancel();
@@ -1040,7 +1228,6 @@
             if(openModalData) {
                 document.getElementById('modal-body').innerHTML = document.getElementById(openModalData).innerHTML;
             }
-            // 若心得視窗開著也要更新
             if(!document.getElementById('feedback-display').classList.contains('hidden')) {
                  const currentMember = document.getElementById('feedback-display').getAttribute('data-member');
                  if(currentMember) showMemberFeedback(currentMember);
@@ -1100,34 +1287,66 @@
             element.querySelector('.flipper').classList.toggle('rotate-y-180');
         }
 
-        function answerQuiz(qNum, isCorrect, btn) {
-            if (qNum === 1 && answeredQ1) return;
-            if (qNum === 2 && answeredQ2) return;
-            if (qNum === 3 && answeredQ3) return;
-            if (qNum === 4 && answeredQ4) return;
-            if (qNum === 5 && answeredQ5) return;
+        // --- 互動測驗邏輯 (隨機抽題) ---
+        function shuffleAndShowQuiz() {
+            answeredQuestions.clear();
+            const resultBox = document.getElementById('quiz-result');
+            if(resultBox) resultBox.classList.add('hidden');
+            
+            const pool = document.getElementById('quiz-pool');
+            if(!pool) return;
+            
+            const items = Array.from(pool.querySelectorAll('.quiz-item'));
+            
+            // 重置所有題目的狀態與樣式
+            items.forEach(item => {
+                item.classList.add('hidden');
+                const btns = item.querySelectorAll('.quiz-btn');
+                btns.forEach(b => {
+                    b.disabled = false;
+                    b.className = "quiz-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium text-lg";
+                });
+            });
+            
+            // 洗牌演算法 (Fisher-Yates Shuffle)
+            for (let i = items.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [items[i], items[j]] = [items[j], items[i]];
+            }
+            
+            // 放回 DOM 並顯示隨機前 5 題
+            items.forEach((item, index) => {
+                pool.appendChild(item);
+                if(index < totalVisibleQuiz) {
+                    item.classList.remove('hidden');
+                }
+            });
+        }
 
-            if (qNum === 1) answeredQ1 = true;
-            if (qNum === 2) answeredQ2 = true;
-            if (qNum === 3) answeredQ3 = true;
-            if (qNum === 4) answeredQ4 = true;
-            if (qNum === 5) answeredQ5 = true;
+        function answerQuiz(qId, isCorrect, btn) {
+            if (answeredQuestions.has(qId)) return; // 已經答過該題
+            answeredQuestions.add(qId);
 
-            const buttons = document.getElementById(`q${qNum}-container`).querySelectorAll('.quiz-btn');
+            const container = btn.closest('.quiz-item');
+            const buttons = container.querySelectorAll('.quiz-btn');
+            
+            // 禁用該題所有按鈕
             buttons.forEach(b => { 
                 b.disabled = true; 
                 b.classList.add('opacity-50', 'cursor-not-allowed'); 
                 b.classList.remove('hover:bg-gray-50', 'dark:hover:bg-gray-700'); 
             });
 
+            // 標示所選答案對錯
             btn.classList.remove('opacity-50');
             if (isCorrect) {
-                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'dark:bg-green-900', 'dark:border-green-400', 'dark:text-green-100');
             } else {
-                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800', 'dark:bg-red-900', 'dark:border-red-400', 'dark:text-red-100');
             }
 
-            if (answeredQ1 && answeredQ2 && answeredQ3 && answeredQ4 && answeredQ5) {
+            // 若目前畫面上顯示的題目 (5題) 都答完了，則顯示結果
+            if (answeredQuestions.size === totalVisibleQuiz) {
                 const res = document.getElementById('quiz-result');
                 res.textContent = translations[currentLang]['quiz_result_msg'];
                 res.classList.remove('hidden');
@@ -1175,7 +1394,11 @@
             if (e.target === this) closeModal();
         });
 
-        document.addEventListener('DOMContentLoaded', () => { navigate('home'); });
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', () => { 
+            navigate('home'); 
+            shuffleAndShowQuiz(); // 載入時先隨機抽一次題目
+        });
     </script>
 </body>
 </html>
