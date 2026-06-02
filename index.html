@@ -16,25 +16,25 @@
                         primary: '#003366', 
                         primaryDark: '#002244',
                         blue: {
-                            50: '#f4f6f9',
+                            50: '#f4f6f9',  // 極淺灰藍 (背景用)
                             100: '#e1e7ef',
                             200: '#c3d0df',
                             300: '#a5b9cf',
                             400: '#87a1bf',
-                            500: '#004080',
-                            600: '#003366',
-                            700: '#002244',
+                            500: '#004080', // 鴻海深藍 (漸層/亮部)
+                            600: '#003366', // 鴻海深藍 (主色/按鈕)
+                            700: '#002244', // 鴻海深藍 (懸停/深色)
                             800: '#001122',
                             900: '#000811',
                         },
                         sky: {
-                            50: '#fff0f0',
+                            50: '#fff0f0',  // 極淺紅 (卡片背景)
                             100: '#ffe0e0',
                             200: '#ffc2c2',
                             300: '#ffa3a3',
                             400: '#ff6666',
-                            500: '#E60012',
-                            600: '#cc0010',
+                            500: '#E60012', // 鴻海紅 (主色/漸層/邊框)
+                            600: '#cc0010', // 鴻海紅 (懸停)
                             700: '#a3000d',
                             800: '#7a000a',
                             900: '#520006',
@@ -63,9 +63,15 @@
         .modal-fade-in { animation: modalFadeIn 0.3s ease-out forwards; }
         
         /* 明亮模式下的淺藍色背景覆蓋 (將原本的純白替換為高質感的淺冰藍色) */
-        html:not(.dark) .bg-white { background-color: #f4f8ff !important; }
-        html:not(.dark) .bg-white\/90 { background-color: rgba(244, 248, 255, 0.9) !important; }
-        html:not(.dark) body.bg-blue-50 { background-color: #eaf2fb !important; }
+        html:not(.dark) .bg-white {
+            background-color: #f4f8ff !important;
+        }
+        html:not(.dark) .bg-white\/90 {
+            background-color: rgba(244, 248, 255, 0.9) !important;
+        }
+        html:not(.dark) body.bg-blue-50 {
+            background-color: #eaf2fb !important;
+        }
     </style>
 </head>
 <body class="bg-blue-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300 flex min-h-screen">
@@ -163,7 +169,7 @@
                     </div>
                 </div>
 
-                <!-- 靜態平面地圖區塊 (無圖片版) -->
+                <!-- 靜態平面地圖區塊 -->
                 <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-6 md:p-8 overflow-hidden border border-gray-100 dark:border-gray-700">
                     <div class="flex items-center justify-between mb-4 md:mb-6">
                         <h3 data-i18n="bi_sec4_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 flex items-center"><i data-lucide="globe" class="w-6 h-6 mr-3"></i>三、全球市場版圖</h3>
@@ -436,7 +442,7 @@
                 </div>
             </section>
 
-            <!-- 11. 互動測驗與字卡 -->
+            <!-- 11. 互動測驗 (12題隨機抽5題 + 翻轉字卡) -->
             <section id="quiz" class="page-section hidden py-20 px-8 max-w-6xl mx-auto min-h-[70vh]">
                 <div class="flex justify-center items-center mb-12 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-quiz')">
                     <i data-lucide="award" class="w-8 h-8 mr-3"></i>
@@ -450,7 +456,6 @@
                     <div>
                         <h3 data-i18n="fc_title" class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-8 border-b pb-2 flex items-center"><i data-lucide="book-open" class="w-6 h-6 mr-3"></i>一、翻轉字卡學習 (點擊字卡翻面)</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            
                             <!-- Card 1 -->
                             <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
                                 <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
@@ -463,7 +468,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <!-- Card 2 -->
                             <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
                                 <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
@@ -476,7 +480,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Card 3 -->
                             <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
                                 <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
@@ -489,7 +492,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Card 4 -->
                             <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
                                 <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
@@ -502,7 +504,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Card 5 -->
                             <div class="relative w-full h-64 cursor-pointer perspective-1000" onclick="flipCard(this)">
                                 <div class="w-full h-full transition-transform duration-500 transform-style-preserve-3d flipper">
@@ -515,7 +516,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -686,7 +686,7 @@
                 </div>
             </section>
 
-            <!-- 13. 引用資料 -->
+            <!-- 13. 引用資料 (已修正) -->
             <section id="references" class="page-section hidden py-20 px-8 max-w-4xl mx-auto min-h-[70vh]">
                 <div class="flex items-center mb-10 cursor-pointer text-blue-600 hover:text-blue-800 transition" onclick="speakElementContent('content-references')">
                     <i data-lucide="link" class="w-8 h-8 mr-3"></i>
@@ -696,8 +696,8 @@
                 <div id="content-references" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-xl">
                     <ul class="space-y-6">
                         <li class="flex items-start"><i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i><div><a href="#" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_1">國策管 - 1142 互動網頁競賽規則與 TP0 提案</a></div></li>
-                        <li class="flex items-start"><i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i><div><a href="https://moodle.nccu.edu.tw/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_2">Moodle 課程討論區</a></div></li>
-                        <li class="flex items-start"><i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i><div><a href="#" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_3">鴻海科技集團 官方網站與財務報告</a></div></li>
+                        <li class="flex items-start"><i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i><div><a href="https://moodle.ncnu.edu.tw/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_2">Moodle 課程討論區</a></div></li>
+                        <li class="flex items-start"><i data-lucide="external-link" class="w-6 h-6 text-gray-400 mr-4 mt-1 shrink-0"></i><div><a href="https://www.honhai.com/zh-tw/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold text-lg" data-i18n="ref_3">鴻海科技集團 官方網站與財務報告</a></div></li>
                     </ul>
                 </div>
             </section>
@@ -768,6 +768,7 @@
                 </div>
             </div>
         </div>
+        <!-- 企業簡介與組織架構模版 (結束) -->
 
         <!-- 產品與商業模式模版 -->
         <div id="tpl-prod-mix">
@@ -882,7 +883,7 @@
             <ul class="space-y-6 text-lg text-gray-700 dark:text-gray-300">
                 <li class="flex items-start"><i data-lucide="radar" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_s">感知 (Sensing)：</span><span data-i18n="res_dc_s_d">敏銳預見手機增長趨緩與地緣風險，超前佈署 3+3 新興產業與海外佈局。</span></div></li>
                 <li class="flex items-start"><i data-lucide="hand-grab" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_se">擷取 (Seizing)：</span><span data-i18n="res_dc_se_d">利用 BOL 模式與 MIH 平台轉化新商機，建立在地供應鏈與開放生態系。</span></div></li>
-                <li class="flex items-start"><i data-lucide="refresh-cw" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_t">轉型 (Transforming)：</span><span data-i18n="res_dc_t_d">推推動 Foxconn 2.0 數位轉型，重組生產常規打造智慧「燈塔工廠」，升級人力資本。</span></div></li>
+                <li class="flex items-start"><i data-lucide="refresh-cw" class="w-8 h-8 text-purple-500 mr-4 mt-1 shrink-0"></i><div><span class="font-bold text-purple-600 dark:text-purple-400 block mb-1" data-i18n="res_dc_t">轉型 (Transforming)：</span><span data-i18n="res_dc_t_d">推動 Foxconn 2.0 數位轉型，重組生產常規打造智慧「燈塔工廠」，升級人力資本。</span></div></li>
             </ul>
         </div>
 
